@@ -14129,7 +14129,7 @@ MonoBehaviour:
   _sprite: {fileID: 1660298223, guid: efd33e4c1a8254ba0b0e301e51eac753, type: 3}
   _materialOverride: {fileID: 2100000, guid: a92c88cb949364ec19e5e0bb90d56076, type: 2}
   _depthInPixels: 1
-  _scaleMultiplier: 0.5
+  _scaleMultiplier: 0.425
   _alphaCutoff: 0.1
   _rebuildOnStart: 1
 --- !u!4 &1122642828
@@ -14140,13 +14140,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122642826}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21179236, y: 0.67171973, z: 0.21346645, w: 0.6770293}
-  m_LocalPosition: {x: 0.4, y: -0.175, z: 0.45}
+  m_LocalRotation: {x: 0.20082916, y: 0.677988, z: 0.20082916, w: 0.677988}
+  m_LocalPosition: {x: 0.4, y: -0.125, z: 0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 330585546}
-  m_LocalEulerAnglesHint: {x: 0, y: 89.549, z: 35}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 33}
 --- !u!33 &1122642829
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -14660,8 +14660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59730e2a72e634d0f9e32c235d1936f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.PlayerMovement
-  _walkSpeed: 4
-  _sprintSpeed: 7
+  _walkSpeed: 6
+  _sprintSpeed: 9
   _acceleration: 35
   _deceleration: 35
   _airMovementMultiplier: 0.6
