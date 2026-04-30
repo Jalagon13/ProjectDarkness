@@ -18,6 +18,7 @@ namespace ProjectDarkness
         public bool IsHoldingSprintInput { get; private set; }
         public bool JumpPressed { get; private set; }
         public bool IsHoldingDownJump { get; private set; }
+        public bool IsHoldingBowChargeDown { get; private set; }
         public Vector2 LookInput { get; private set; }
 
         private void Awake()
@@ -41,6 +42,10 @@ namespace ProjectDarkness
 
             _playerInput.Player.Jump.started += GameInput_OnJump;
             _playerInput.Player.Jump.canceled += GameInput_OnJump;
+            
+            _playerInput.Player.ChargeBow.started += GameInput_OnChargeBow;
+            _playerInput.Player.ChargeBow.canceled += GameInput_OnChargeBow;
+
         }
 
         private void OnDestroy()
@@ -61,6 +66,15 @@ namespace ProjectDarkness
 
             _playerInput.Player.Jump.started -= GameInput_OnJump;
             _playerInput.Player.Jump.canceled -= GameInput_OnJump;
+
+            _playerInput.Player.ChargeBow.started -= GameInput_OnChargeBow;
+            _playerInput.Player.ChargeBow.canceled -= GameInput_OnChargeBow;
+        }
+
+        private void GameInput_OnChargeBow(InputAction.CallbackContext context)
+        {
+            IsHoldingBowChargeDown = context.ReadValueAsButton();
+            Debug.Log($"IsHoldingBowChargeDown: {IsHoldingBowChargeDown}");
         }
 
         private void PlayerInput_OnLook(InputAction.CallbackContext context)

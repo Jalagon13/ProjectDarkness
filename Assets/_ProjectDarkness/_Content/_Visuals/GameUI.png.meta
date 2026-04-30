@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: efd33e4c1a8254ba0b0e301e51eac753
+guid: e5aa0f65e403048649590409e4e0c64f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -21,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -110,89 +110,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bow_charge_0
+      name: ui_arrow_charge
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 27
         width: 16
-        height: 16
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dfe125de2c1c4e49ba0fb2b932e50e1
-      internalID: 1660298223
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bow_charge_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 117139bee15a545609aa2fac06d8219d
-      internalID: 1372638443
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bow_charge_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ef3cbbd178094cb8ae23f7459bf70f0
-      internalID: 1431609084
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bow_charge_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f60d97fc5fa3445809bcff18d135467c
-      internalID: -159321621
+      spriteID: 76fb5372cb5ac4bd6a70f95fa80c70f8
+      internalID: -389616813
       vertices: []
       indices: 
       edges: []
@@ -201,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 030dd3f8d9526425e9eb1fa39963f8c4
+    spriteID: 5bcdf4a6a49614a0c840e5e6abcfb17d
     internalID: 0
     vertices: []
     indices: 
@@ -211,10 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bow_charge_0: 1660298223
-      bow_charge_1: 1372638443
-      bow_charge_2: 1431609084
-      bow_charge_3: -159321621
+      ui_arrow_charge: -389616813
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

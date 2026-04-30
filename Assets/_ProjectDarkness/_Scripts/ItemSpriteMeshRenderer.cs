@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace ProjectDarkness
@@ -16,9 +17,6 @@ namespace ProjectDarkness
         [SerializeField] [Min(0.01f)] private float _depthInPixels = 1f;
         [SerializeField] [Min(0.01f)] private float _scaleMultiplier = 1f;
         [SerializeField] [Range(0f, 1f)] private float _alphaCutoff = 0.1f;
-
-        [Header("Build")]
-        [SerializeField] private bool _rebuildOnStart = true;
 
         private const string RuntimeShaderName = "ProjectDarkness/ItemSpriteCutout";
 
@@ -39,15 +37,7 @@ namespace ProjectDarkness
             EnsureComponents();
         }
 
-        private void Start()
-        {
-            if (_rebuildOnStart)
-            {
-                Rebuild();
-            }
-        }
-
-        [ContextMenu("Rebuild")]
+        [Button("Rebuild")]
         public void Rebuild()
         {
             EnsureComponents();
