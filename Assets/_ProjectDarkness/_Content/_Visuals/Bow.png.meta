@@ -206,7 +206,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -215,6 +215,28 @@ TextureImporter:
       bones: []
       spriteID: 8e4fa9a673db848f895e8349ba365e04
       internalID: -879719484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bow_charge_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0209f4cada5b44568c2261a82e41977
+      internalID: 38416963
       vertices: []
       indices: 
       edges: []
@@ -238,6 +260,7 @@ TextureImporter:
       bow_charge_1: 1372638443
       bow_charge_2: 1431609084
       bow_charge_3: -159321621
+      bow_charge_4: 38416963
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

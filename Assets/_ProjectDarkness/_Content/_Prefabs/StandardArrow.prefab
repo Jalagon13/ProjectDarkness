@@ -106,7 +106,7 @@ MonoBehaviour:
   _sprite: {fileID: -879719484, guid: efd33e4c1a8254ba0b0e301e51eac753, type: 3}
   _materialOverride: {fileID: 2100000, guid: a92c88cb949364ec19e5e0bb90d56076, type: 2}
   _depthInPixels: 1
-  _scaleMultiplier: 0.425
+  _scaleMultiplier: 0.45
   _alphaCutoff: 0.1
 --- !u!1 &4151263385767631329
 GameObject:
