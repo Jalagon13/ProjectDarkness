@@ -21,6 +21,11 @@ namespace ProjectDarkness
 
         private void Start()
         {
+            if (BowManager.Instance != null)
+            {
+                BowManager.Instance.OnBowReleased += BowManager_OnBowReleased;
+            }
+
             ShowNeutralFrame();
         }
 
@@ -29,14 +34,12 @@ namespace ProjectDarkness
             if (BowManager.Instance == null)
             {
                 ShowNeutralFrame();
-                DestroySpawnedArrow();
                 return;
             }
 
             if (!BowManager.Instance.IsCharging)
             {
                 ShowNeutralFrame();
-                DestroySpawnedArrow();
                 return;
             }
 
@@ -103,6 +106,7 @@ namespace ProjectDarkness
             }
 
             _spawnedArrow = Instantiate(_standardArrowPrefab, transform);
+            _spawnedArrow.SetLoadedState();
         }
 
         private void DestroySpawnedArrow()
@@ -193,8 +197,28 @@ namespace ProjectDarkness
             }
         }
 
+        private void BowManager_OnBowReleased(float chargePercent)
+        {
+            if (_spawnedArrow == null)
+            {
+                return;
+            }
+
+            StandardArrow launchedArrow = _spawnedArrow;
+            _spawnedArrow = null;
+
+            Camera mainCamera = Camera.main;
+            Transform launchOrigin = mainCamera != null ? mainCamera.transform : null;
+            launchedArrow.Launch(chargePercent, launchOrigin);
+        }
+
         private void OnDestroy()
         {
+            if (BowManager.Instance != null)
+            {
+                BowManager.Instance.OnBowReleased -= BowManager_OnBowReleased;
+            }
+
             DestroySpawnedArrow();
         }
     }

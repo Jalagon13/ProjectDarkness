@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ProjectDarkness
@@ -5,6 +6,7 @@ namespace ProjectDarkness
     public class BowManager : MonoBehaviour
     {
         public static BowManager Instance { get; private set; }
+        public event Action<float> OnBowReleased;
         
         [SerializeField] private float _chargeDuration = 1f;
         
@@ -70,6 +72,7 @@ namespace ProjectDarkness
 
         private void ReleaseBow()
         {
+            OnBowReleased?.Invoke(_chargePercent);
             OnRelease(_chargePercent);
             _isCharging = false;
             _chargePercent = 0f;
