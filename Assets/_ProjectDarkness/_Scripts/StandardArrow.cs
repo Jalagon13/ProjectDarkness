@@ -78,6 +78,16 @@ namespace ProjectDarkness
             _rigidbody.AddForce(launchDirection * (_launchForce * Mathf.Clamp01(chargePercent)), ForceMode.Impulse);
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!_isLaunched)
+            {
+                return;
+            }
+
+            Destroy(gameObject);
+        }
+
         private Vector3 PrepareLaunchFromOrigin(Transform launchOrigin)
         {
             if (launchOrigin == null)

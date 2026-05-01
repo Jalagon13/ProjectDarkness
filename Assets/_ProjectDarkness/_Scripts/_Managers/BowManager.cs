@@ -9,6 +9,7 @@ namespace ProjectDarkness
         public event Action<float> OnBowReleased;
         
         [SerializeField] private float _chargeDuration = 1f;
+        [SerializeField] private float _postFireCooldown = 0.25f;
         
 
         [Range(0f, 1f)] private float _chargePercent;
@@ -17,39 +18,39 @@ namespace ProjectDarkness
         
         private bool _isCharging;
         private Timer _chargeTimer;
+        private float _cooldownRemaining;
 
         private void Awake()
         {
             Instance = this;
             _chargeTimer = new Timer(Mathf.Max(_chargeDuration, 0.01f));
+            StartCharge();
         }
 
         private void Update()
         {
-            if (GameInput.Instance == null)
+            if (_cooldownRemaining > 0f)
             {
+                _cooldownRemaining = Mathf.Max(0f, _cooldownRemaining - Time.deltaTime);
+                _isCharging = false;
                 return;
             }
 
-            if (GameInput.Instance.IsHoldingBowChargeDown)
-            {
-                UpdateCharge();
-                return;
-            }
-
-            if (_isCharging || _chargePercent > 0f)
-            {
-                ReleaseBow();
-            }
-        }
-
-        private void UpdateCharge()
-        {
             if (!_isCharging)
             {
                 StartCharge();
             }
 
+            UpdateCharge();
+
+            if (_chargePercent >= 1f && GameInput.Instance != null && GameInput.Instance.IsHoldingBowChargeDown)
+            {
+                FireBow();
+            }
+        }
+
+        private void UpdateCharge()
+        {
             if (_chargePercent >= 1f)
             {
                 _chargePercent = 1f;
@@ -70,13 +71,14 @@ namespace ProjectDarkness
             Debug.Log($"Bow Charge Started!");
         }
 
-        private void ReleaseBow()
+        private void FireBow()
         {
             OnBowReleased?.Invoke(_chargePercent);
             OnRelease(_chargePercent);
             _isCharging = false;
             _chargePercent = 0f;
             _chargeTimer.Reset();
+            _cooldownRemaining = Mathf.Max(0f, _postFireCooldown);
         }
         
         public void OnRelease(float chargeCompletion)
