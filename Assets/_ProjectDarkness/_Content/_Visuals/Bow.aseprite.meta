@@ -129,7 +129,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Bow
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.49206352, y: -0.033333335}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -137,8 +137,8 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 62
-      height: 15
+      width: 63
+      height: 30
     spriteID: 7c5d8c165dc704bc2be633562d84d35a
     spriteBone: []
     spriteOutline: []
@@ -168,9 +168,9 @@ ScriptedImporter:
       additiveSortOrder: 0
       cellRect:
         x: 1
-        y: 0
-        width: 62
-        height: 15
+        y: 1
+        width: 63
+        height: 30
       spriteId: 7c5d8c165dc704bc2be633562d84d35a
     linkedCells: []
     tileCells: []
@@ -181,5 +181,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 64, y: 16}
-  previousTextureSize: {x: 128, y: 32}
+  canvasSize: {x: 64, y: 32}
+  previousTextureSize: {x: 128, y: 64}

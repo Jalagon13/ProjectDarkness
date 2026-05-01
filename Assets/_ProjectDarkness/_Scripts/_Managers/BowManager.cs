@@ -7,6 +7,7 @@ namespace ProjectDarkness
         public static BowManager Instance { get; private set; }
         
         [SerializeField] private float _chargeDuration = 1f;
+        
 
         [Range(0f, 1f)] private float _chargePercent;
         public float ChargePercent => _chargePercent;
