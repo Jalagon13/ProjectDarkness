@@ -5,6 +5,8 @@ namespace ProjectDarkness
     [RequireComponent(typeof(Rigidbody))]
     public class StandardArrow : MonoBehaviour
     {
+        private const float DefaultAimRayDistance = 1000f;
+
         [field: SerializeField] private Transform ArrowRearPoint;
         [SerializeField] [Min(0f)] private float _launchForce = 20f;
         [SerializeField] [Min(0f)] private float _rotationLerpSpeed = 12f;
@@ -103,26 +105,19 @@ namespace ProjectDarkness
 
             if (launchOrigin != null)
             {
-                Vector3 targetDirection = launchOrigin.forward.normalized;
-                Vector3 currentDirection = GetLaunchDirection();
+                Vector3 launchPosition =
+                    launchOrigin.position +
+                    (launchOrigin.forward * _launchOriginForwardOffset) +
+                    (launchOrigin.right * _launchOriginRightOffset) -
+                    (launchOrigin.up * _launchOriginDownOffset);
 
-                if (currentDirection.sqrMagnitude > 0.0001f && targetDirection.sqrMagnitude > 0.0001f)
-                {
-                    Quaternion rotationOffset = Quaternion.FromToRotation(currentDirection, targetDirection);
-                    transform.rotation = rotationOffset * transform.rotation;
-                }
-
+                Vector3 targetDirection = GetAimDirectionFromCameraRay(launchOrigin, launchPosition);
                 if (ArrowRearPoint != null)
                 {
-                    Vector3 launchPosition =
-                        launchOrigin.position +
-                        (targetDirection * _launchOriginForwardOffset) +
-                        (launchOrigin.right * _launchOriginRightOffset) -
-                        (launchOrigin.up * _launchOriginDownOffset);
-
                     transform.position += launchPosition - ArrowRearPoint.position;
                 }
 
+                RotateArrowTowardDirection(targetDirection);
                 return targetDirection;
             }
 
@@ -133,6 +128,33 @@ namespace ProjectDarkness
             }
 
             return fallbackDirection;
+        }
+
+        private Vector3 GetAimDirectionFromCameraRay(Transform launchOrigin, Vector3 launchPosition)
+        {
+            Ray ray = new(launchOrigin.position, launchOrigin.forward);
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, DefaultAimRayDistance))
+            {
+                Vector3 directionToHit = (hitInfo.point - launchPosition).normalized;
+                if (directionToHit.sqrMagnitude > 0.0001f)
+                {
+                    return directionToHit;
+                }
+            }
+
+            return launchOrigin.forward.normalized;
+        }
+
+        private void RotateArrowTowardDirection(Vector3 targetDirection)
+        {
+            Vector3 currentDirection = GetLaunchDirection();
+            if (currentDirection.sqrMagnitude <= 0.0001f || targetDirection.sqrMagnitude <= 0.0001f)
+            {
+                return;
+            }
+
+            Quaternion rotationOffset = Quaternion.FromToRotation(currentDirection, targetDirection);
+            transform.rotation = rotationOffset * transform.rotation;
         }
 
         private Vector3 GetLaunchDirection()
