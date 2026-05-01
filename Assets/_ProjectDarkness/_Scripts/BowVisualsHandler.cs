@@ -4,14 +4,20 @@ namespace ProjectDarkness
 {
     public class BowVisualsHandler : MonoBehaviour
     {
+        private const string ArrowHolderTag = "ArrowHolder";
+
         [Header("Bow Frames")]
         [SerializeField] private GameObject _neutralFrame;
         [Space(5)]
         [SerializeField] private GameObject[] _bowFrames;
         [Space(5)]
         [SerializeField] private GameObject _fullyChargedFrame;
+        
+        [Header("Arrow Settings")]
+        [SerializeField] private StandardArrow _standardArrowPrefab;
 
         private int _currentFrameIndex = -1;
+        private StandardArrow _spawnedArrow;
 
         private void Start()
         {
@@ -23,16 +29,20 @@ namespace ProjectDarkness
             if (BowManager.Instance == null)
             {
                 ShowNeutralFrame();
+                DestroySpawnedArrow();
                 return;
             }
 
             if (!BowManager.Instance.IsCharging)
             {
                 ShowNeutralFrame();
+                DestroySpawnedArrow();
                 return;
             }
 
             ShowChargedFrame(BowManager.Instance.ChargePercent);
+            EnsureArrowSpawned();
+            AlignArrowToCurrentFrame();
         }
 
         private void ShowNeutralFrame()
@@ -85,6 +95,83 @@ namespace ProjectDarkness
             SetOnlyFrameActive(_currentFrameIndex);
         }
 
+        private void EnsureArrowSpawned()
+        {
+            if (_spawnedArrow != null || _standardArrowPrefab == null)
+            {
+                return;
+            }
+
+            _spawnedArrow = Instantiate(_standardArrowPrefab, transform);
+        }
+
+        private void DestroySpawnedArrow()
+        {
+            if (_spawnedArrow == null)
+            {
+                return;
+            }
+
+            Destroy(_spawnedArrow.gameObject);
+            _spawnedArrow = null;
+        }
+
+        private void AlignArrowToCurrentFrame()
+        {
+            if (_spawnedArrow == null)
+            {
+                return;
+            }
+
+            Transform arrowRearPoint = _spawnedArrow.RearPoint;
+            Transform arrowHolder = GetArrowHolderForCurrentFrame();
+            if (arrowRearPoint == null || arrowHolder == null)
+            {
+                return;
+            }
+
+            Transform arrowTransform = _spawnedArrow.transform;
+            Quaternion rotationOffset = arrowHolder.rotation * Quaternion.Inverse(arrowRearPoint.rotation);
+            arrowTransform.rotation = rotationOffset * arrowTransform.rotation;
+            arrowTransform.position += arrowHolder.position - arrowRearPoint.position;
+        }
+
+        private Transform GetArrowHolderForCurrentFrame()
+        {
+            GameObject currentFrame = GetFrameByIndex(_currentFrameIndex);
+            if (currentFrame == null)
+            {
+                return null;
+            }
+
+            Transform[] childTransforms = currentFrame.GetComponentsInChildren<Transform>(true);
+            foreach (Transform childTransform in childTransforms)
+            {
+                if (childTransform.CompareTag(ArrowHolderTag))
+                {
+                    return childTransform;
+                }
+            }
+
+            return null;
+        }
+
+        private GameObject GetFrameByIndex(int frameIndex)
+        {
+            if (frameIndex <= 0)
+            {
+                return _neutralFrame;
+            }
+
+            int middleFrameCount = _bowFrames?.Length ?? 0;
+            if (frameIndex <= middleFrameCount)
+            {
+                return _bowFrames[frameIndex - 1];
+            }
+
+            return _fullyChargedFrame;
+        }
+
         private void SetOnlyFrameActive(int activeFrameIndex)
         {
             SetFrameActive(_neutralFrame, activeFrameIndex == 0);
@@ -104,6 +191,11 @@ namespace ProjectDarkness
             {
                 frame.SetActive(isActive);
             }
+        }
+
+        private void OnDestroy()
+        {
+            DestroySpawnedArrow();
         }
     }
 }

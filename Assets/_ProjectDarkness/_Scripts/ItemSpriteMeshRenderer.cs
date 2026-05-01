@@ -17,6 +17,9 @@ namespace ProjectDarkness
         [SerializeField] [Min(0.01f)] private float _depthInPixels = 1f;
         [SerializeField] [Min(0.01f)] private float _scaleMultiplier = 1f;
         [SerializeField] [Range(0f, 1f)] private float _alphaCutoff = 0.1f;
+        
+        [Header("Build")]
+        [SerializeField] private bool _buildOnStart = false;
 
         private const string RuntimeShaderName = "ProjectDarkness/ItemSpriteCutout";
 
@@ -35,6 +38,14 @@ namespace ProjectDarkness
         private void Awake()
         {
             EnsureComponents();
+        }
+        
+        private void Start()
+        {
+            if (_buildOnStart)
+            {
+                Rebuild();
+            }
         }
 
         [Button("Rebuild")]
