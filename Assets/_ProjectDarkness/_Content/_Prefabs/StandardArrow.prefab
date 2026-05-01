@@ -239,4 +239,6 @@ MonoBehaviour:
   ArrowRearPoint: {fileID: 8571796793347077262}
   _launchForce: 35
   _rotationLerpSpeed: 12
-  _launchOriginForwardOffset: 0.3
+  _launchOriginForwardOffset: 0.15
+  _launchOriginRightOffset: 0.135
+  _launchOriginDownOffset: 0.075

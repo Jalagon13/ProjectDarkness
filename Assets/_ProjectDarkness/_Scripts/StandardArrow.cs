@@ -9,6 +9,8 @@ namespace ProjectDarkness
         [SerializeField] [Min(0f)] private float _launchForce = 20f;
         [SerializeField] [Min(0f)] private float _rotationLerpSpeed = 12f;
         [SerializeField] [Min(0f)] private float _launchOriginForwardOffset = 0.2f;
+        [SerializeField] [Min(0f)] private float _launchOriginRightOffset = 0.15f;
+        [SerializeField] [Min(0f)] private float _launchOriginDownOffset = 0.15f;
 
         public Transform RearPoint => ArrowRearPoint;
 
@@ -112,7 +114,12 @@ namespace ProjectDarkness
 
                 if (ArrowRearPoint != null)
                 {
-                    Vector3 launchPosition = launchOrigin.position + (targetDirection * _launchOriginForwardOffset);
+                    Vector3 launchPosition =
+                        launchOrigin.position +
+                        (targetDirection * _launchOriginForwardOffset) +
+                        (launchOrigin.right * _launchOriginRightOffset) -
+                        (launchOrigin.up * _launchOriginDownOffset);
+
                     transform.position += launchPosition - ArrowRearPoint.position;
                 }
 

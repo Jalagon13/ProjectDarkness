@@ -574,7 +574,7 @@ namespace ProjectDarkness
                 {
                     ""name"": """",
                     ""id"": ""2ef81630-ab28-44b2-8aab-45f99f65a4d7"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",

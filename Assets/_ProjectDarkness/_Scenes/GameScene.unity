@@ -16424,8 +16424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edafad46337cf466182a33a27ac56dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.BowManager
-  _chargeDuration: 0.65
-  _postFireCooldown: 0.35
+  _chargeDuration: 0.55
+  _postFireCooldown: 0.45
 --- !u!1 &1447572117
 GameObject:
   m_ObjectHideFlags: 0
@@ -17103,13 +17103,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1840729580}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.017247409, y: -0.046582013, z: -0.045087148, w: 0.99774736}
-  m_LocalPosition: {x: -0.014, y: 0.052, z: -0.008}
+  m_LocalRotation: {x: 0.008513496, y: -0.091484904, z: -0.025735667, w: 0.99543744}
+  m_LocalPosition: {x: 0.089, y: 0.014, z: 0.005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 330585546}
-  m_LocalEulerAnglesHint: {x: 1.732, y: -5.426, z: -5.257}
+  m_LocalEulerAnglesHint: {x: 0.701, y: -10.52, z: -3.027}
 --- !u!1 &2038095859
 GameObject:
   m_ObjectHideFlags: 0
