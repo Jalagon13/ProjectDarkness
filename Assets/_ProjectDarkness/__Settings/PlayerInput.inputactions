@@ -88,7 +88,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChargeBow",
+                    "name": "CastSpell",
                     "type": "Button",
                     "id": "88dca2bb-9fa6-4bf6-9267-b1597189d7ee",
                     "expectedControlType": "",
@@ -490,7 +490,7 @@
                     "interactions": "Hold",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "ChargeBow",
+                    "action": "CastSpell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

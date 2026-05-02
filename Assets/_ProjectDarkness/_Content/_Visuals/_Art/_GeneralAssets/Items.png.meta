@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e5aa0f65e403048649590409e4e0c64f
+guid: db1ea769d990840c0bedaf3169a55950
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -21,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui_arrow_charge
+      name: Item_WoodWand
       rect:
         serializedVersion: 2
         x: 0
-        y: 27
+        y: 0
         width: 16
-        height: 5
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76fb5372cb5ac4bd6a70f95fa80c70f8
-      internalID: -389616813
+      spriteID: b1774706339f8444bb4b26480e829fd7
+      internalID: -1230552837
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5bcdf4a6a49614a0c840e5e6abcfb17d
+    spriteID: 557638df08d3f47c9b0ea727265940ec
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ui_arrow_charge: -389616813
+      Item_WoodWand: -1230552837
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

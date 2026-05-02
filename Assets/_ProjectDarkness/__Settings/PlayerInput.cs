@@ -176,7 +176,7 @@ namespace ProjectDarkness
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ChargeBow"",
+                    ""name"": ""CastSpell"",
                     ""type"": ""Button"",
                     ""id"": ""88dca2bb-9fa6-4bf6-9267-b1597189d7ee"",
                     ""expectedControlType"": """",
@@ -578,7 +578,7 @@ namespace ProjectDarkness
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""ChargeBow"",
+                    ""action"": ""CastSpell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1175,7 +1175,7 @@ namespace ProjectDarkness
             m_Player_Previous = m_Player.FindAction("Previous", throwIfNotFound: true);
             m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
             m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
-            m_Player_ChargeBow = m_Player.FindAction("ChargeBow", throwIfNotFound: true);
+            m_Player_CastSpell = m_Player.FindAction("CastSpell", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1278,7 +1278,7 @@ namespace ProjectDarkness
         private readonly InputAction m_Player_Previous;
         private readonly InputAction m_Player_Next;
         private readonly InputAction m_Player_Sprint;
-        private readonly InputAction m_Player_ChargeBow;
+        private readonly InputAction m_Player_CastSpell;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -1327,9 +1327,9 @@ namespace ProjectDarkness
             /// </summary>
             public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
             /// <summary>
-            /// Provides access to the underlying input action "Player/ChargeBow".
+            /// Provides access to the underlying input action "Player/CastSpell".
             /// </summary>
-            public InputAction @ChargeBow => m_Wrapper.m_Player_ChargeBow;
+            public InputAction @CastSpell => m_Wrapper.m_Player_CastSpell;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1383,9 +1383,9 @@ namespace ProjectDarkness
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
-                @ChargeBow.started += instance.OnChargeBow;
-                @ChargeBow.performed += instance.OnChargeBow;
-                @ChargeBow.canceled += instance.OnChargeBow;
+                @CastSpell.started += instance.OnCastSpell;
+                @CastSpell.performed += instance.OnCastSpell;
+                @CastSpell.canceled += instance.OnCastSpell;
             }
 
             /// <summary>
@@ -1424,9 +1424,9 @@ namespace ProjectDarkness
                 @Sprint.started -= instance.OnSprint;
                 @Sprint.performed -= instance.OnSprint;
                 @Sprint.canceled -= instance.OnSprint;
-                @ChargeBow.started -= instance.OnChargeBow;
-                @ChargeBow.performed -= instance.OnChargeBow;
-                @ChargeBow.canceled -= instance.OnChargeBow;
+                @CastSpell.started -= instance.OnCastSpell;
+                @CastSpell.performed -= instance.OnCastSpell;
+                @CastSpell.canceled -= instance.OnCastSpell;
             }
 
             /// <summary>
@@ -1791,12 +1791,12 @@ namespace ProjectDarkness
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnSprint(InputAction.CallbackContext context);
             /// <summary>
-            /// Method invoked when associated input action "ChargeBow" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// Method invoked when associated input action "CastSpell" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>
             /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-            void OnChargeBow(InputAction.CallbackContext context);
+            void OnCastSpell(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
