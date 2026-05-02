@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.StandardArrow
   ArrowRearPoint: {fileID: 8571796793347077262}
-  _launchForce: 40
+  _launchForce: 25
   _rotationLerpSpeed: 12
   _launchOriginForwardOffset: 0.15
   _launchOriginRightOffset: 0.132
