@@ -71,6 +71,18 @@ namespace ProjectDarkness
             return slotIndex >= 0 && slotIndex < _slots.Count;
         }
 
+        public void SwapSlots(int index1, int index2)
+        {
+            if (!IsValidSlotIndex(index1) || !IsValidSlotIndex(index2)) return;
+            if (index1 == index2) return;
+
+            SpellData temp = _slots[index1].SpellData;
+            _slots[index1].SetSpell(_slots[index2].SpellData);
+            _slots[index2].SetSpell(temp);
+
+            OnInventoryUpdated?.Invoke();
+        }
+
         private void InitializeSlots()
         {
             _slots.Clear();

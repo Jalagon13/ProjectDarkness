@@ -13,6 +13,7 @@ namespace ProjectDarkness
         
         [field: SerializeField] public Transform CastPoint { get; private set; }
         [SerializeField] private List<InventorySlot> _spellInventory = new();
+        public List<InventorySlot> SpellInventory => _spellInventory;
 
         private float _aimRayDistance = 1000f;
         private float _currentMana;
@@ -92,7 +93,10 @@ namespace ProjectDarkness
             int spellIndex = GetNextOccupiedSpellIndex(_currentSequenceIndex);
             if (spellIndex < 0)
             {
-                StartCooldown();
+                if (_currentSequenceIndex > 0)
+                {
+                    StartCooldown();
+                }
                 return;
             }
 

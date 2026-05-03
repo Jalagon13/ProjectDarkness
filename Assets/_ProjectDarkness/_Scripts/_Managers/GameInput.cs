@@ -89,7 +89,6 @@ namespace ProjectDarkness
             }
 
             IsHoldingDownCastSpell = context.ReadValueAsButton();
-            Debug.Log($"IsHoldingDownCastSpell: {IsHoldingDownCastSpell}");
         }
 
         private void PlayerInput_OnLook(InputAction.CallbackContext context)

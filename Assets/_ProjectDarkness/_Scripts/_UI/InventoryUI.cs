@@ -9,8 +9,13 @@ namespace ProjectDarkness
         [SerializeField] private InventorySlotUI _slotPrefab;
         [SerializeField] private RectTransform _inventoryPanel;
         [SerializeField] private RectTransform _inventoryMenu;
+        [Header("Wand UI Settings")]
+        [SerializeField] private RectTransform _wandPanel;
+        [SerializeField] private WandPanelUI _wandPanelUIPrefab;
+        [SerializeField] private List<Wand> _wandList;
 
         private readonly List<InventorySlotUI> _slotUis = new();
+        private readonly List<WandPanelUI> _wandPanelUis = new();
         private bool _isOpen;
         public bool IsOpen => _isOpen;
 
@@ -22,6 +27,7 @@ namespace ProjectDarkness
             GameInput.Instance.OnToggleInventory += ToggleInventory;
 
             BuildSlots();
+            BuildWandPanels();
             RefreshAll();
 
             _isOpen = false;
@@ -60,8 +66,20 @@ namespace ProjectDarkness
             for (int slotIndex = 0; slotIndex < InventoryManager.Instance.Slots.Count; slotIndex++)
             {
                 InventorySlotUI slotUi = CreateSlotInstance();
-                slotUi.Initialize(this, slotIndex);
+                slotUi.Initialize(transform, slotIndex, RefreshAll);
                 _slotUis.Add(slotUi);
+            }
+        }
+
+        private void BuildWandPanels()
+        {
+            foreach (Wand wand in _wandList)
+            {
+                if (wand == null) continue;
+                WandPanelUI wandPanel = Instantiate(_wandPanelUIPrefab, _wandPanel);
+                wandPanel.transform.localScale = Vector3.one;
+                wandPanel.Initialize(wand, transform, RefreshAll);
+                _wandPanelUis.Add(wandPanel);
             }
         }
 
@@ -71,6 +89,11 @@ namespace ProjectDarkness
             {
                 InventorySlot slot = InventoryManager.Instance.GetSlot(slotUi.SlotIndex);
                 slotUi.Refresh(slot);
+            }
+
+            foreach (WandPanelUI wandPanel in _wandPanelUis)
+            {
+                wandPanel.RefreshAll();
             }
         }
 
