@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff11fb0d4ec9472b87db6025450d27b4, type: 3}
+  m_Name: BasicSpellData
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.SpellData
+  <SpellPrefab>k__BackingField: {fileID: 7238224538603127218, guid: d3f149549efbd4c7a89f2459844b5287, type: 3}
+  <UiDisplay>k__BackingField: {fileID: 21300008, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+  <Speed>k__BackingField: 20
+  <Distance>k__BackingField: 10
+  <ManaReq>k__BackingField: 3

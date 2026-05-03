@@ -29,6 +29,12 @@ namespace ProjectDarkness
         {
             Vector2 moveInput = GameInput.Instance.MoveInput;
             bool isGrounded = _characterController.isGrounded;
+            bool isInventoryOpen = InventoryManager.Instance != null && InventoryManager.Instance.InventoryUI != null && InventoryManager.Instance.InventoryUI.IsOpen;
+
+            if (isInventoryOpen)
+            {
+                moveInput = Vector2.zero;
+            }
 
             // Keep the controller snapped to the ground so it does not accumulate downward velocity.
             if (isGrounded && _velocity.y < 0f)
@@ -49,7 +55,8 @@ namespace ProjectDarkness
 
             _horizontalVelocity = Vector3.MoveTowards(_horizontalVelocity, targetHorizontalVelocity, accelerationRate * Time.fixedDeltaTime);
 
-            if (isGrounded && GameInput.Instance.ConsumeJumpPressed())
+            bool tryJump = GameInput.Instance.ConsumeJumpPressed();
+            if (isGrounded && !isInventoryOpen && tryJump)
             {
                 _velocity.y = Mathf.Sqrt(2f * _jumpHeight * -_gravity);
             }

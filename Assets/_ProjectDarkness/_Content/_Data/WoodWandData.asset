@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.WandData
   <ManaAmount>k__BackingField: 80
   <ManaRegenRatePerSec>k__BackingField: 10
-  <CastDelayTime>k__BackingField: 0.15
+  <CastDelayTime>k__BackingField: 0.2
   <CooldownTime>k__BackingField: 0.5
+  <Capacity>k__BackingField: 3

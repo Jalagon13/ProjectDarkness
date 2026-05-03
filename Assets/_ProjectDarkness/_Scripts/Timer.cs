@@ -31,6 +31,11 @@ namespace ProjectDarkness
             get { return _duration; }
         }
 
+        public bool IsRunning()
+        {
+            return _remainingSeconds > 0f && !IsPaused;
+        }
+
         public void AddTime(float time)
         {
             _remainingSeconds += time;

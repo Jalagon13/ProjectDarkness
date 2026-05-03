@@ -4,14 +4,11 @@ namespace ProjectDarkness
 {
     public class Spell : MonoBehaviour
     {
-        [SerializeField] private float _speed = 10f;
-        [SerializeField] private float _distance = 10f;
-        [SerializeField] private int _manaReq = 10;
-
         private Vector3 _travelDirection;
         private Vector3 _lastPosition;
         private float _distanceTravelled;
         private bool _isActive;
+        private SpellData _spellData;
 
         private void Awake()
         {
@@ -25,7 +22,13 @@ namespace ProjectDarkness
                 return;
             }
 
-            float frameDistance = _speed * Time.deltaTime;
+            if (_spellData == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            float frameDistance = _spellData.Speed * Time.deltaTime;
             if (frameDistance <= 0f)
             {
                 return;
@@ -41,14 +44,15 @@ namespace ProjectDarkness
             _distanceTravelled += frameDistance;
             _lastPosition = transform.position;
 
-            if (_distanceTravelled >= _distance)
+            if (_distanceTravelled >= _spellData.Distance)
             {
                 Destroy(gameObject);
             }
         }
 
-        public void Cast(Vector3 direction)
+        public void Cast(SpellData spellData, Vector3 direction)
         {
+            _spellData = spellData;
             _travelDirection = direction.normalized;
 
             if (_travelDirection.sqrMagnitude <= Mathf.Epsilon)

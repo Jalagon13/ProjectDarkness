@@ -19,6 +19,11 @@ namespace ProjectDarkness
 
         private void LateUpdate()
         {
+            if (InventoryManager.Instance != null && InventoryManager.Instance.InventoryUI != null && InventoryManager.Instance.InventoryUI.IsOpen)
+            {
+                return;
+            }
+
             float mouseX = GameInput.Instance.LookInput.x * _mouseSensitivity * Time.deltaTime;
             float mouseY = GameInput.Instance.LookInput.y * _mouseSensitivity * Time.deltaTime;
 

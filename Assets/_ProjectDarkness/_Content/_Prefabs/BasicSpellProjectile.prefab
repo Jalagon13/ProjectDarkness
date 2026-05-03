@@ -44,9 +44,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eee5c10786aee46ed9b74021ff576c46, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.SpellProjectile
-  _speed: 10
-  _distance: 10
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.Spell
 --- !u!1 &6461521923406656866
 GameObject:
   m_ObjectHideFlags: 0

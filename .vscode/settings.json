@@ -67,5 +67,9 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "ProjectDarkness.slnx"
+    "dotnet.defaultSolution": "ProjectDarkness.slnx",
+    "dotrush.roslyn.projectOrSolutionFiles": [
+        "/Users/jalagon/Projects/ProjectDarkness/Library/com.singularitygroup.hotreload/Solution/ProjectDarkness.sln",
+        "/Users/jalagon/Projects/ProjectDarkness/ProjectDarkness.slnx"
+    ]
 }
