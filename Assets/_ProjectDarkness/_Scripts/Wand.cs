@@ -143,12 +143,12 @@ namespace ProjectDarkness
                 projectileDirection = CastPoint.forward;
             }
 
-            Spell spellProjectile = Instantiate(
+            Spell spell = Instantiate(
                 spellData.SpellPrefab,
                 CastPoint.position,
                 Quaternion.LookRotation(projectileDirection));
 
-            spellProjectile.Cast(spellData, projectileDirection);
+            spell.Cast(projectileDirection);
             return true;
         }
 

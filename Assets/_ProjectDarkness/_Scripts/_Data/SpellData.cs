@@ -11,5 +11,6 @@ namespace ProjectDarkness
         [field: SerializeField] public float Speed { get; private set; } = 10f;
         [field: SerializeField] public float Distance { get; private set; } = 10f;
         [field: SerializeField] public int ManaReq { get; private set; } = 10;
+        [field: SerializeField] public int Damage { get; private set; } = 5;
     }
 }
