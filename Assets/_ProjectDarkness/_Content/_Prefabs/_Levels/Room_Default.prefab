@@ -15544,71 +15544,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &4888327846719221642
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1382688374054020674}
-  - component: {fileID: 8002040782063399653}
-  m_Layer: 0
-  m_Name: Reflection Probe
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1382688374054020674
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4888327846719221642}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 4, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6553663939653209083}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!215 &8002040782063399653
-ReflectionProbe:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4888327846719221642}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Type: 0
-  m_Mode: 1
-  m_RefreshMode: 0
-  m_TimeSlicingMode: 0
-  m_Resolution: 128
-  m_UpdateFrequency: 0
-  m_BoxSize: {x: 20, y: 8, z: 20}
-  m_BoxOffset: {x: 0, y: 0, z: 0}
-  m_NearClip: 0.3
-  m_FarClip: 1000
-  m_ShadowDistance: 100
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IntensityMultiplier: 1
-  m_BlendDistance: 1
-  m_HDR: 1
-  m_BoxProjection: 0
-  m_RenderDynamicObjects: 0
-  m_UseOcclusionCulling: 1
-  m_Importance: 1
-  m_CustomBakedTexture: {fileID: 0}
 --- !u!1 &6625256045858016980
 GameObject:
   m_ObjectHideFlags: 0
@@ -31689,6 +31624,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67673674ae07d438a91389cc4b52aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.Room
+  _northWallSlot: {fileID: 1171627750237008542}
+  _southWallSlot: {fileID: 5079761990950850134}
+  _eastWallSlot: {fileID: 4904594680196590267}
+  _westWallSlot: {fileID: 4645543106714010485}
 --- !u!1 &9044211026819768349
 GameObject:
   m_ObjectHideFlags: 0
@@ -31719,7 +31658,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6218670598027468823}
-  - {fileID: 1382688374054020674}
   m_Father: {fileID: 641157578618227855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2942848116693480371
@@ -31803,6 +31741,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd2565b394ec84289a572240af4582df, type: 3}
+--- !u!114 &1171627750237008542 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4077285975790502189, guid: bd2565b394ec84289a572240af4582df, type: 3}
+  m_PrefabInstance: {fileID: 2942848116693480371}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4fda62679dc4651b18603375d89491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.WallSlot
 --- !u!4 &2739622992196375870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1067916463407015565, guid: bd2565b394ec84289a572240af4582df, type: 3}
@@ -31868,6 +31817,10 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1777
       objectReference: {fileID: 0}
+    - target: {fileID: 3220048816408434427, guid: bd2565b394ec84289a572240af4582df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4811414795377533535, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
       value: 1364
@@ -31885,6 +31838,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd2565b394ec84289a572240af4582df, type: 3}
+--- !u!114 &4645543106714010485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4077285975790502189, guid: bd2565b394ec84289a572240af4582df, type: 3}
+  m_PrefabInstance: {fileID: 8713661715056214616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4fda62679dc4651b18603375d89491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.WallSlot
 --- !u!4 &8520570201126888661 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1067916463407015565, guid: bd2565b394ec84289a572240af4582df, type: 3}
@@ -31950,6 +31914,10 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1777
       objectReference: {fileID: 0}
+    - target: {fileID: 3220048816408434427, guid: bd2565b394ec84289a572240af4582df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4811414795377533535, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
       value: 1364
@@ -31967,6 +31935,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd2565b394ec84289a572240af4582df, type: 3}
+--- !u!114 &4904594680196590267 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4077285975790502189, guid: bd2565b394ec84289a572240af4582df, type: 3}
+  m_PrefabInstance: {fileID: 8972845144303709078}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4fda62679dc4651b18603375d89491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.WallSlot
 --- !u!4 &8239321515907419419 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1067916463407015565, guid: bd2565b394ec84289a572240af4582df, type: 3}
@@ -32053,6 +32032,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd2565b394ec84289a572240af4582df, type: 3}
+--- !u!114 &5079761990950850134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4077285975790502189, guid: bd2565b394ec84289a572240af4582df, type: 3}
+  m_PrefabInstance: {fileID: 9145576520801374075}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4fda62679dc4651b18603375d89491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.WallSlot
 --- !u!4 &8086667497273453046 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1067916463407015565, guid: bd2565b394ec84289a572240af4582df, type: 3}

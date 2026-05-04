@@ -24,47 +24,16 @@ namespace ProjectDarkness
 
             _floorPlan = new Dictionary<Vector2Int, RoomEntry>();
         }
-        
-        private void Start()
-        {
-            
-        }
 
         [Button("Generate Level")]
         private void GenerateLevel()
         {
-            GenerateFloorPlan();
+            GenerateFloorPlanData();
+            GenerateDoorwayData();
             SpawnRooms();
         }
 
-        private void SpawnRooms()
-        {
-            foreach (Room room in _spawnedRooms)
-            {
-                if (room != null)
-                {
-                    Destroy(room.gameObject);
-                }
-            }
-            
-            _spawnedRooms.Clear();
-
-            Vector2Int startPos = new Vector2Int(_floorPlanGridXLength / 2, _floorPlanGridYLength / 2);
-
-            foreach (var kvp in _floorPlan)
-            {
-                Vector2Int gridPos = kvp.Key;
-
-                float worldX = (gridPos.x - startPos.x) * _roomLength;
-                float worldZ = (gridPos.y - startPos.y) * _roomLength;
-                Vector3 worldPos = new Vector3(worldX, 0f, worldZ);
-
-                Room newRoom = Instantiate(_roomPrefab, worldPos, Quaternion.identity);
-                _spawnedRooms.Add(newRoom);
-            }
-        }
-
-        private void GenerateFloorPlan()
+        private void GenerateFloorPlanData()
         {
             Vector2Int startPos = new Vector2Int(_floorPlanGridXLength / 2, _floorPlanGridYLength / 2);
 
@@ -167,6 +136,49 @@ namespace ProjectDarkness
                 
                 Debug.Log($"Generated Isaac Dungeon with {_floorPlan.Count} rooms in {retries} attempts.");
                 break;
+            }
+        }
+
+        private void GenerateDoorwayData()
+        {
+            foreach (var kvp in _floorPlan)
+            {
+                Vector2Int pos = kvp.Key;
+                RoomEntry room = kvp.Value;
+
+                // Check cardinal directions for neighbors. If a room exists in the dictionary at that offset, we need a door!
+                room.HasNorthDoor = _floorPlan.ContainsKey(pos + Vector2Int.up);
+                room.HasSouthDoor = _floorPlan.ContainsKey(pos + Vector2Int.down);
+                room.HasEastDoor = _floorPlan.ContainsKey(pos + Vector2Int.right);
+                room.HasWestDoor = _floorPlan.ContainsKey(pos + Vector2Int.left);
+            }
+        }
+
+        private void SpawnRooms()
+        {
+            foreach (Room room in _spawnedRooms)
+            {
+                if (room != null)
+                {
+                    Destroy(room.gameObject);
+                }
+            }
+
+            _spawnedRooms.Clear();
+
+            Vector2Int startPos = new Vector2Int(_floorPlanGridXLength / 2, _floorPlanGridYLength / 2);
+
+            foreach (var kvp in _floorPlan)
+            {
+                Vector2Int gridPos = kvp.Key;
+
+                float worldX = (gridPos.x - startPos.x) * _roomLength;
+                float worldZ = (gridPos.y - startPos.y) * _roomLength;
+                Vector3 worldPos = new Vector3(worldX, 0f, worldZ);
+
+                Room newRoom = Instantiate(_roomPrefab, worldPos, Quaternion.identity);
+                newRoom.Initialize(kvp.Value);
+                _spawnedRooms.Add(newRoom);
             }
         }
     }
