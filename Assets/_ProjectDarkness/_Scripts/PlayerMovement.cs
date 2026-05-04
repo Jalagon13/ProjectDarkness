@@ -15,6 +15,7 @@ namespace ProjectDarkness
         [Header("Jump")]
         [SerializeField] private float _jumpHeight = 1.5f;
         [SerializeField] private float _gravity = -9.81f;
+        [SerializeField] private bool _enableGravity;
 
         private CharacterController _characterController;
         private Vector3 _velocity;
@@ -61,7 +62,10 @@ namespace ProjectDarkness
                 _velocity.y = Mathf.Sqrt(2f * _jumpHeight * -_gravity);
             }
 
-            _velocity.y += _gravity * Time.fixedDeltaTime;
+            if (_enableGravity)
+            {
+                _velocity.y += _gravity * Time.fixedDeltaTime;
+            }
 
             Vector3 frameVelocity = _horizontalVelocity;
             frameVelocity.y = _velocity.y;
