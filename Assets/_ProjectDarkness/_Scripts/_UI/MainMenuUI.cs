@@ -32,10 +32,8 @@ namespace ProjectDarkness
         
         private void Start()
         {
-            Debug.Log($"Mainmenu Scene Started {GameManager.Instance.GameRestarted}");
             if(GameManager.Instance.GameRestarted)
             {
-                Debug.Log($"Restarting Run");
                 // Automatically start a new run
                 GameManager.Instance.GameRestarted = false;
                 EnterGameScene();
