@@ -15467,7 +15467,7 @@ Light:
   m_InnerSpotAngle: 0
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -31584,7 +31584,7 @@ GameObject:
   - component: {fileID: 641157578618227855}
   - component: {fileID: 5724554196618857077}
   m_Layer: 0
-  m_Name: Room_Default
+  m_Name: Room_Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31628,6 +31628,7 @@ MonoBehaviour:
   <SouthWall>k__BackingField: {fileID: 5079761990950850134}
   <EastWall>k__BackingField: {fileID: 4904594680196590267}
   <WestWall>k__BackingField: {fileID: 4645543106714010485}
+  HasBeenVisited: 0
 --- !u!1 &9044211026819768349
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,6 +38,8 @@ namespace ProjectDarkness
 
         [Space]
         [Header("NPC Specific")]
+        [Tooltip("If yes, then this npc will be part of a combat room if in one")]
+        public bool IsCombatNpc = false;
         [Tooltip("The String ID of the NPC used for serialization not runtime lookups and networksyncing")]
         public string StringID;
         [Tooltip("Prefab for the NPC")]

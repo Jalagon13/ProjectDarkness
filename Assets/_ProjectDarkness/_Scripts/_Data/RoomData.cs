@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace ProjectDarkness
 {
-    [CreateAssetMenu(fileName = "New Room Data", menuName = "ProjectDarkness/RoomData")]
-    public class RoomData : ScriptableObject
+    [CreateAssetMenu(fileName = "New Room Pool Data", menuName = "ProjectDarkness/RoomPoolData")]
+    public class RoomPoolData : ScriptableObject
     {
-        [field: SerializeField] public int ManaAmount { get; private set; } = 80;
-        [field: SerializeField] public float ManaRegenRatePerSec { get; private set; } = 10;
-        [field: SerializeField] public float CastDelayTime { get; private set; } = 0.15f;
-        [field: SerializeField] public float CooldownTime { get; private set; } = 0.5f;
-        [field: SerializeField] public int Capacity { get; private set; } = 3;
-
+        [field: SerializeField] public Room[] RoomPool { get; private set; }
+        
+        public Room GetRandomRoomFromPool()
+        {
+            return RoomPool[Random.Range(0, RoomPool.Length)];
+        }
     }
 }

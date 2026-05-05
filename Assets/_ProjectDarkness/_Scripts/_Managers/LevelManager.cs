@@ -13,22 +13,26 @@ namespace ProjectDarkness
         
         public event Action OnRoomTransitionStart;
         public event Action OnRoomTransitionEnd;
-        
+
+        [Header("Level Creation")]
         [SerializeField] private int _level = 1;
         [SerializeField] private int _roomLength = 22;
         [SerializeField] private int _floorPlanGridXLength = 8;
         [SerializeField] private int _floorPlanGridYLength = 9;
-        [SerializeField] private Room _roomPrefab;
         [SerializeField] private bool _generateLevelOnStart = true;
+        
+        [Header("Room")]
+        [SerializeField] private Room _startingRoomPrefab;
+        [SerializeField] private RoomPoolData _combatRoomPool;
         
         [Header("UI")]
         [SerializeField] private TransitionPanelUI _transitionPanelUI;
         [SerializeField] private float _fadeToBlackDuration = 0.5f;
         [SerializeField] private float _fadeToClearDuration = 0.5f;
 
+        private Vector2Int _startPos = new();
         private Dictionary <Vector2Int, RoomEntry> _floorPlan;
         private readonly Dictionary<Vector2Int, Room> _spawnedRooms = new();
-        private Vector2Int _startPos = new();
         private RoomEntry _currentActiveRoomEntry;
         
         private bool _isTransitioning;
@@ -58,6 +62,7 @@ namespace ProjectDarkness
             DestroyRooms();
             GenerateFloorPlanData();
             GenerateConnectionData();
+            GenerateRoomTypeData();
             GenerateRooms();
         }
 
@@ -66,7 +71,6 @@ namespace ProjectDarkness
             _startPos = new Vector2Int(_floorPlanGridXLength / 2, _floorPlanGridYLength / 2);
 
             int numberOfRooms = Mathf.FloorToInt(UnityEngine.Random.Range(0, 2) + 5 + _level * 2.6f);
-            Debug.Log($"numberOfRooms: {numberOfRooms}");
 
             int maxRetries = 2000;
             int retries = 0;
@@ -162,7 +166,7 @@ namespace ProjectDarkness
                 }
 
 
-                Debug.Log($"Generated Isaac Dungeon with {_floorPlan.Count} rooms in {retries} attempts.");
+                Debug.Log($"Generated Room Level with {_floorPlan.Count} rooms in {retries} attempts.");
                 break;
             }
         }
@@ -185,6 +189,21 @@ namespace ProjectDarkness
 
                 Vector2Int westPos = pos + Vector2Int.left;
                 room.WestDoorConnection.UpdateData(_floorPlan.ContainsKey(westPos), _floorPlan.ContainsKey(westPos) ? _floorPlan[westPos] : null);
+            }
+        }
+
+        private void GenerateRoomTypeData()
+        {
+            foreach (var kvp in _floorPlan)
+            {
+                if(kvp.Value.RoomCoord == _startPos)
+                {
+                    kvp.Value.SetRoomType(RoomType.StartingRoom);
+                }
+                else
+                {
+                    kvp.Value.SetRoomType(RoomType.CombatRoom);
+                }
             }
         }
 
@@ -252,11 +271,31 @@ namespace ProjectDarkness
             float worldZ = (roomCoord.y - _startPos.y) * _roomLength;
             Vector3 worldPos = new Vector3(worldX, 0f, worldZ);
 
-            Room newRoom = Instantiate(_roomPrefab, worldPos, Quaternion.identity);
+            Room newRoom = Instantiate(GetRoomPrefab(roomCoord), worldPos, Quaternion.identity);
             newRoom.Initialize(_floorPlan[roomCoord]);
             newRoom.gameObject.SetActive(false);
 
             _spawnedRooms.Add(roomCoord, newRoom);
+        }
+        
+        private Room GetRoomPrefab(Vector2Int roomCoord)
+        {
+            RoomEntry room = _floorPlan[roomCoord];
+
+            switch(room.RoomType)
+            {
+                case RoomType.StartingRoom:
+                    return _startingRoomPrefab;
+                case RoomType.CombatRoom:
+                    return _combatRoomPool.GetRandomRoomFromPool();
+                case RoomType.BossRoom:
+                    break;
+                case RoomType.Shoproom:
+                    break;
+            }
+            
+            Debug.LogError($"No room found to spawn. Should be impossible to see this message.");
+            return null;
         }
 
         private void DestroyRooms()
@@ -285,7 +324,18 @@ namespace ProjectDarkness
         
         private void SetRoomActive(Vector2Int roomCoord, bool isActive)
         {
-            _spawnedRooms[roomCoord].gameObject.SetActive(isActive);
+            Room room = _spawnedRooms[roomCoord];
+            
+            if(isActive)
+            {
+                room.gameObject.SetActive(isActive);
+                room.OnRoomEnter();
+            }
+            else
+            {
+                room.OnRoomExist();
+                room.gameObject.SetActive(isActive);
+            }
         }
 
         #endregion

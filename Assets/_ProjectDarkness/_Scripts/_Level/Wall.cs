@@ -2,19 +2,14 @@ using UnityEngine;
 
 namespace ProjectDarkness
 {
-    public enum WallState
-    {
-        Solid,
-        Doorway
-    }
-
     public class Wall : MonoBehaviour
     {
         [SerializeField] private GameObject _solidWall;
         [SerializeField] private GameObject _doorwayWall;
         [SerializeField] private Transform _onEnterPlacementPoint;
-        public Transform OnEnterPlacementPoint => _onEnterPlacementPoint;
+        [SerializeField] private Door _door;
         
+        public Transform OnEnterPlacementPoint => _onEnterPlacementPoint;
         private WallState _wallState;
         private RoomEntry _roomEntry;
         private CardinalDirection _direction;
@@ -41,6 +36,14 @@ namespace ProjectDarkness
                     _solidWall.SetActive(false);
                     _doorwayWall.SetActive(true);
                     break;
+            }
+        }
+        
+        public void SetDoorState(DoorState doorState)
+        {
+            if(_wallState == WallState.Doorway)
+            {
+                _door.SetDoorState(doorState);
             }
         }
         

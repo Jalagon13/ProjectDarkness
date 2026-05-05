@@ -16,7 +16,6 @@ namespace ProjectDarkness
     
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log($"Collided with {other.gameObject.name}");
             if(other.TryGetComponent(out Npc npc))
             {
                 Debug.Log($"Found NPC {npc.gameObject.name}");
