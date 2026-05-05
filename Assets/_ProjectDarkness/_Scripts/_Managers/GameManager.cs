@@ -8,10 +8,20 @@ namespace ProjectDarkness
         
         [HideInInspector]
         public bool GameStarted = false;
-        
+
+        [HideInInspector]
+        public bool GameRestarted = false;
+
         private void Awake()
         {
-            Instance = this;
+            if(Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
 
             DontDestroyOnLoad(this);
         }

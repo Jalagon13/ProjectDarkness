@@ -17,12 +17,9 @@ namespace ProjectDarkness
 
             _newGameButton.onClick.AddListener(() =>
             {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                
-                GameManager.Instance.GameStarted = true;
-
-                Loader.Load(Loader.Scene.GameScene);
+                if(GameManager.Instance.GameRestarted) return; // If player chose restart, do not be able to press this button and let the game restart by itself
+            
+                EnterGameScene();
             });
 
             _quitButton.onClick.AddListener(() =>
@@ -31,6 +28,28 @@ namespace ProjectDarkness
             });
 
             Time.timeScale = 1f;
+        }
+        
+        private void Start()
+        {
+            Debug.Log($"Mainmenu Scene Started {GameManager.Instance.GameRestarted}");
+            if(GameManager.Instance.GameRestarted)
+            {
+                Debug.Log($"Restarting Run");
+                // Automatically start a new run
+                GameManager.Instance.GameRestarted = false;
+                EnterGameScene();
+            }
+        }
+        
+        private void EnterGameScene()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
+            GameManager.Instance.GameStarted = true;
+
+            Loader.Load(Loader.Scene.GameScene);
         }
     }
 }
