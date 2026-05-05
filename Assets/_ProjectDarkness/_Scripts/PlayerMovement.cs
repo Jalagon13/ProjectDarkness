@@ -28,6 +28,11 @@ namespace ProjectDarkness
 
         private void FixedUpdate()
         {
+            if(LevelManager.Instance.IsTransitioning)
+            {
+                return;
+            }
+            
             Vector2 moveInput = GameInput.Instance.MoveInput;
             bool isGrounded = _characterController.isGrounded;
             bool isInventoryOpen = InventoryManager.Instance != null && InventoryManager.Instance.InventoryUI != null && InventoryManager.Instance.InventoryUI.IsOpen;
@@ -70,6 +75,16 @@ namespace ProjectDarkness
             Vector3 frameVelocity = _horizontalVelocity;
             frameVelocity.y = _velocity.y;
             _characterController.Move(frameVelocity * Time.fixedDeltaTime);
+        }
+
+        public void Teleport(Vector3 position, Quaternion rotation)
+        {
+            _characterController.enabled = false;
+            transform.SetPositionAndRotation(position, rotation);
+            _characterController.enabled = true;
+
+            _velocity = Vector3.zero;
+            _horizontalVelocity = Vector3.zero;
         }
     }
 }

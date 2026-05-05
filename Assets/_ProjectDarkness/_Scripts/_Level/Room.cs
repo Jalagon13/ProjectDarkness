@@ -2,19 +2,27 @@ using UnityEngine;
 
 namespace ProjectDarkness
 {
+    public enum CardinalDirection
+    {
+        North,
+        South,
+        East,
+        West
+    }
+
     public class Room : MonoBehaviour
     {
-        [SerializeField] private WallSlot _northWallSlot;
-        [SerializeField] private WallSlot _southWallSlot;
-        [SerializeField] private WallSlot _eastWallSlot;
-        [SerializeField] private WallSlot _westWallSlot;
-    
+        [field: SerializeField] public Wall NorthWall { get; private set; }
+        [field: SerializeField] public Wall SouthWall { get; private set; }
+        [field: SerializeField] public Wall EastWall { get; private set; }
+        [field: SerializeField] public Wall WestWall { get; private set; }
+
         public void Initialize(RoomEntry roomEntry)
         {
-            _northWallSlot.SetWallState(roomEntry.HasNorthDoor ? WallState.Doorway : WallState.Solid);
-            _southWallSlot.SetWallState(roomEntry.HasSouthDoor ? WallState.Doorway : WallState.Solid);
-            _eastWallSlot.SetWallState(roomEntry.HasEastDoor ? WallState.Doorway : WallState.Solid);
-            _westWallSlot.SetWallState(roomEntry.HasWestDoor ? WallState.Doorway : WallState.Solid);
+            NorthWall.Initialize(roomEntry.NorthDoorConnection.IsEnabled ? WallState.Doorway : WallState.Solid, roomEntry, CardinalDirection.North);
+            SouthWall.Initialize(roomEntry.SouthDoorConnection.IsEnabled ? WallState.Doorway : WallState.Solid, roomEntry, CardinalDirection.South);
+            EastWall.Initialize(roomEntry.EastDoorConnection.IsEnabled ? WallState.Doorway : WallState.Solid, roomEntry, CardinalDirection.East);
+            WestWall.Initialize(roomEntry.WestDoorConnection.IsEnabled ? WallState.Doorway : WallState.Solid, roomEntry, CardinalDirection.West);
         }
     }
 }

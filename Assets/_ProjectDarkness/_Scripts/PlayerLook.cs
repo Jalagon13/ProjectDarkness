@@ -19,7 +19,7 @@ namespace ProjectDarkness
 
         private void LateUpdate()
         {
-            if (InventoryManager.Instance != null && InventoryManager.Instance.InventoryUI != null && InventoryManager.Instance.InventoryUI.IsOpen)
+            if (InventoryManager.Instance.InventoryUI.IsOpen || LevelManager.Instance.IsTransitioning)
             {
                 return;
             }

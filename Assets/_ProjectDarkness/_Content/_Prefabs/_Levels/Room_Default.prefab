@@ -31624,10 +31624,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67673674ae07d438a91389cc4b52aa00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.Room
-  _northWallSlot: {fileID: 1171627750237008542}
-  _southWallSlot: {fileID: 5079761990950850134}
-  _eastWallSlot: {fileID: 4904594680196590267}
-  _westWallSlot: {fileID: 4645543106714010485}
+  <NorthWall>k__BackingField: {fileID: 1171627750237008542}
+  <SouthWall>k__BackingField: {fileID: 5079761990950850134}
+  <EastWall>k__BackingField: {fileID: 4904594680196590267}
+  <WestWall>k__BackingField: {fileID: 4645543106714010485}
 --- !u!1 &9044211026819768349
 GameObject:
   m_ObjectHideFlags: 0
@@ -31670,7 +31670,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 423681356903104378, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1449
+      value: 1452
       objectReference: {fileID: 0}
     - target: {fileID: 1067916463407015565, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31718,7 +31718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2268584519850441493, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1777
+      value: 1780
       objectReference: {fileID: 0}
     - target: {fileID: 3220048816408434427, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_IsActive
@@ -31728,13 +31728,17 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1364
       objectReference: {fileID: 0}
+    - target: {fileID: 7357104317024037687, guid: bd2565b394ec84289a572240af4582df, type: 3}
+      propertyPath: m_VersionIndex
+      value: 509
+      objectReference: {fileID: 0}
     - target: {fileID: 7588504994308735663, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_Name
-      value: WallSlot_North
+      value: Wall_North
       objectReference: {fileID: 0}
     - target: {fileID: 8797618143167158601, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1765
+      value: 1768
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31767,7 +31771,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 423681356903104378, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1449
+      value: 1452
       objectReference: {fileID: 0}
     - target: {fileID: 1067916463407015565, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31815,7 +31819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2268584519850441493, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1777
+      value: 1780
       objectReference: {fileID: 0}
     - target: {fileID: 3220048816408434427, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_IsActive
@@ -31825,13 +31829,17 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1364
       objectReference: {fileID: 0}
+    - target: {fileID: 7357104317024037687, guid: bd2565b394ec84289a572240af4582df, type: 3}
+      propertyPath: m_VersionIndex
+      value: 509
+      objectReference: {fileID: 0}
     - target: {fileID: 7588504994308735663, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_Name
-      value: WallSlot_West
+      value: Wall_West
       objectReference: {fileID: 0}
     - target: {fileID: 8797618143167158601, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1765
+      value: 1768
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31864,7 +31872,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 423681356903104378, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1449
+      value: 1452
       objectReference: {fileID: 0}
     - target: {fileID: 1067916463407015565, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31912,7 +31920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2268584519850441493, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1777
+      value: 1780
       objectReference: {fileID: 0}
     - target: {fileID: 3220048816408434427, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_IsActive
@@ -31922,13 +31930,17 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1364
       objectReference: {fileID: 0}
+    - target: {fileID: 7357104317024037687, guid: bd2565b394ec84289a572240af4582df, type: 3}
+      propertyPath: m_VersionIndex
+      value: 509
+      objectReference: {fileID: 0}
     - target: {fileID: 7588504994308735663, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_Name
-      value: WallSlot_East
+      value: Wall_East
       objectReference: {fileID: 0}
     - target: {fileID: 8797618143167158601, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1765
+      value: 1768
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31961,7 +31973,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 423681356903104378, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1449
+      value: 1452
       objectReference: {fileID: 0}
     - target: {fileID: 1067916463407015565, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32009,7 +32021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2268584519850441493, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1777
+      value: 1780
       objectReference: {fileID: 0}
     - target: {fileID: 3220048816408434427, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_IsActive
@@ -32019,13 +32031,17 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1364
       objectReference: {fileID: 0}
+    - target: {fileID: 7357104317024037687, guid: bd2565b394ec84289a572240af4582df, type: 3}
+      propertyPath: m_VersionIndex
+      value: 509
+      objectReference: {fileID: 0}
     - target: {fileID: 7588504994308735663, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_Name
-      value: WallSlot_South
+      value: Wall_South
       objectReference: {fileID: 0}
     - target: {fileID: 8797618143167158601, guid: bd2565b394ec84289a572240af4582df, type: 3}
       propertyPath: m_VersionIndex
-      value: 1765
+      value: 1768
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
