@@ -19,7 +19,6 @@ namespace ProjectDarkness
         [SerializeField] private int _roomLength = 22;
         [SerializeField] private int _floorPlanGridXLength = 8;
         [SerializeField] private int _floorPlanGridYLength = 9;
-        [SerializeField] private bool _generateLevelOnStart = true;
         
         [Header("Room")]
         [SerializeField] private Room _startingRoomPrefab;
@@ -48,8 +47,9 @@ namespace ProjectDarkness
         
         private void Start()
         {
-            if(_generateLevelOnStart)
+            if(GameManager.Instance != null && GameManager.Instance.GameStarted)
             {
+                GameManager.Instance.GameStarted = false;
                 GenerateLevel();
             }
         }

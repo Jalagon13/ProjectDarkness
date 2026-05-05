@@ -25,6 +25,7 @@ namespace ProjectDarkness
         {
             InventoryManager.Instance.OnInventoryUpdated += RefreshAll;
             GameInput.Instance.OnToggleInventory += ToggleInventory;
+            GameInput.Instance.OnTogglePauseMenu += OnTogglePauseMenu;
 
             BuildSlots();
             BuildWandPanels();
@@ -40,6 +41,15 @@ namespace ProjectDarkness
         {
             InventoryManager.Instance.OnInventoryUpdated -= RefreshAll;
             GameInput.Instance.OnToggleInventory -= ToggleInventory;
+            GameInput.Instance.OnTogglePauseMenu -= OnTogglePauseMenu;
+        }
+
+        private void OnTogglePauseMenu()
+        {
+            if(_isOpen)
+            {
+                ToggleInventory();
+            }
         }
 
         private void ToggleInventory()

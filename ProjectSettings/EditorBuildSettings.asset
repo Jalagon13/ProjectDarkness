@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_ProjectDarkness/_Scenes/MainMenuScene.unity
+    guid: 80a14ed17d908418893e6b349b427733
+  - enabled: 1
+    path: Assets/_ProjectDarkness/_Scenes/LoadingScene.unity
+    guid: 7410f7a23a83c49f5a867b3e3542b5fa
+  - enabled: 1
     path: Assets/_ProjectDarkness/_Scenes/GameScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

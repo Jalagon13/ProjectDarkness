@@ -13,6 +13,7 @@ namespace ProjectDarkness
         public event Action<Vector2> OnLook;
         public event Action OnCastSpell;
         public event Action OnToggleInventory;
+        public event Action OnTogglePauseMenu;
 
         private PlayerInput _playerInput;
 
@@ -49,6 +50,7 @@ namespace ProjectDarkness
             _playerInput.Player.CastSpell.canceled += GameInput_OnCastSpell;
 
             _playerInput.UI.ToggleInventory.started += GameInput_OnToggleInventory;
+            _playerInput.UI.TogglePauseMenu.started += GameInput_OnTogglePauseMenu;
         }
 
         private void OnDestroy()
@@ -74,6 +76,12 @@ namespace ProjectDarkness
             _playerInput.Player.CastSpell.canceled -= GameInput_OnCastSpell;
 
             _playerInput.UI.ToggleInventory.started -= GameInput_OnToggleInventory;
+            _playerInput.UI.TogglePauseMenu.started -= GameInput_OnTogglePauseMenu;
+        }
+
+        private void GameInput_OnTogglePauseMenu(InputAction.CallbackContext context)
+        {
+            OnTogglePauseMenu?.Invoke();
         }
 
         private void GameInput_OnToggleInventory(InputAction.CallbackContext context)

@@ -41,6 +41,14 @@ namespace ProjectDarkness
             }
         }
 
+        private void OnTogglePauseMenu()
+        {
+            if(InventoryUI.IsOpen)
+            {
+                
+            }
+        }
+
         public void AddSpell(SpellData spellData)
         {
             if (spellData == null || IsFull)

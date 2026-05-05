@@ -48,7 +48,7 @@ namespace ProjectDarkness
                 return;
             }
 
-            if (!GameInput.Instance.IsHoldingDownCastSpell || InventoryManager.Instance.InventoryUI.IsOpen || LevelManager.Instance.IsTransitioning)
+            if (!GameInput.Instance.IsHoldingDownCastSpell || InventoryManager.Instance.InventoryUI.IsOpen || LevelManager.Instance.IsTransitioning || Time.timeScale == 0f)
             {
                 return;
             }

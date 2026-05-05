@@ -22,6 +22,7 @@ MonoBehaviour:
   IFrameDuration: 0.17
   CanBeKnockedBack: 1
   CanDie: 1
+  IsCombatNpc: 1
   StringID: test
   NpcPrefab: {fileID: 0}
   HurtSound:
