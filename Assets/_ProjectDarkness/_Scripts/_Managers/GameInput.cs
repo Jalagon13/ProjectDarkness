@@ -86,6 +86,11 @@ namespace ProjectDarkness
 
         private void GameInput_OnToggleInventory(InputAction.CallbackContext context)
         {
+            if(GameManager.Instance.GameComplete)
+            {
+                return;
+            }
+            
             OnToggleInventory?.Invoke();
         }
 

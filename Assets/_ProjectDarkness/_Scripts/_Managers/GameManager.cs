@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ProjectDarkness
@@ -6,11 +7,16 @@ namespace ProjectDarkness
     {
         public static GameManager Instance { get; private set; }
         
+        public event Action OnGameComplete;
+        
         [HideInInspector]
         public bool GameStarted = false;
 
         [HideInInspector]
         public bool GameRestarted = false;
+
+        [HideInInspector]
+        public bool GameComplete = false;
 
         private void Awake()
         {
@@ -24,6 +30,12 @@ namespace ProjectDarkness
             }
 
             DontDestroyOnLoad(this);
+        }
+        
+        public void CompleteGame()
+        {
+            GameComplete = true;
+            OnGameComplete?.Invoke();
         }
     }
 }

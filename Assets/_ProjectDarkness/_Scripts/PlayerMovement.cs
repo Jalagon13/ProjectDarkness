@@ -28,7 +28,7 @@ namespace ProjectDarkness
 
         private void FixedUpdate()
         {
-            if(LevelManager.Instance.IsTransitioning || HealthManager.Instance.IsDead)
+            if(LevelManager.Instance.IsTransitioning || HealthManager.Instance.IsDead || (GameManager.Instance != null && GameManager.Instance.GameComplete))
             {
                 return;
             }

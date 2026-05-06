@@ -38,6 +38,8 @@ namespace ProjectDarkness
                 GameManager.Instance.GameRestarted = false;
                 EnterGameScene();
             }
+            
+            GameManager.Instance.GameComplete = false;
         }
         
         private void EnterGameScene()

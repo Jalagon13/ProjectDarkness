@@ -26,6 +26,7 @@ namespace ProjectDarkness
         
         [Header("Room")]
         [SerializeField] private Room _startingRoomPrefab;
+        [SerializeField] private Room _bossRoomPrefab;
         [SerializeField] private RoomPoolData _combatRoomPool;
         
         [Header("UI")]
@@ -332,7 +333,7 @@ namespace ProjectDarkness
                     return _combatRoomPool.GetRandomRoomFromPool();
                 case RoomType.BossRoom:
                     // Falling back to combat room until you have a Boss prefab
-                    return _combatRoomPool.GetRandomRoomFromPool();
+                    return _bossRoomPrefab;
                 case RoomType.Shoproom:
                     break;
             }

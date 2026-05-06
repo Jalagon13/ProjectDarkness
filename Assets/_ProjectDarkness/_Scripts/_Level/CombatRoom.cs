@@ -27,7 +27,7 @@ namespace ProjectDarkness
                 OpenAllDoors();
             }
         }
-
+        
         public void RegisterCombatNpc(Npc npc)
         {
             Debug.Log($"Registering NPC {npc.gameObject.name}");
@@ -44,9 +44,14 @@ namespace ProjectDarkness
             
             if (_combatNpcs.Count == 0)
             {
-                _combatRoomState = CombatRoomState.Cleared;
-                OpenAllDoors();
+                OnRoomClear();
             }
+        }
+
+        protected virtual void OnRoomClear()
+        {
+            _combatRoomState = CombatRoomState.Cleared;
+            OpenAllDoors();
         }
 
         private void CloseAllDoors()

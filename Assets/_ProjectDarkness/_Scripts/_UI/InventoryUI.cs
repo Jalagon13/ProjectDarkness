@@ -27,6 +27,8 @@ namespace ProjectDarkness
             GameInput.Instance.OnToggleInventory += ToggleInventory;
             GameInput.Instance.OnTogglePauseMenu += OnTogglePauseMenu;
             HealthManager.Instance.OnDeath += OnDeath;
+            GameManager.Instance.OnGameComplete += OnGameComplete;
+
 
             BuildSlots();
             BuildWandPanels();
@@ -44,6 +46,15 @@ namespace ProjectDarkness
             GameInput.Instance.OnToggleInventory -= ToggleInventory;
             GameInput.Instance.OnTogglePauseMenu -= OnTogglePauseMenu;
             HealthManager.Instance.OnDeath -= OnDeath;
+            GameManager.Instance.OnGameComplete -= OnGameComplete;
+        }
+
+        private void OnGameComplete()
+        {
+            if (_isOpen)
+            {
+                ToggleInventory();
+            }
         }
 
         private void OnDeath()

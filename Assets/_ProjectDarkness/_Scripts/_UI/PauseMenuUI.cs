@@ -35,7 +35,7 @@ namespace ProjectDarkness
 
         private void TogglePauseMenu()
         {
-            if(InventoryManager.Instance.InventoryUI.IsOpen || HealthManager.Instance.IsDead) return;
+            if(InventoryManager.Instance.InventoryUI.IsOpen || HealthManager.Instance.IsDead || GameManager.Instance.GameComplete) return;
         
             _isPaused = !_isPaused;
 

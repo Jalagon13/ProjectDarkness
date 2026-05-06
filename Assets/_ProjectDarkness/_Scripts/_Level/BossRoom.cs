@@ -2,11 +2,13 @@ using UnityEngine;
 
 namespace ProjectDarkness
 {
-    public class BossRoom : Room
+    public class BossRoom : CombatRoom
     {
-        protected override void OnFirstVisit()
+        protected override void OnRoomClear()
         {
-            
+            base.OnRoomClear();
+
+            GameManager.Instance.CompleteGame();
         }
     }
 }

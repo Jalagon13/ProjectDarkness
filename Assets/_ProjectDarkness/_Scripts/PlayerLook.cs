@@ -19,7 +19,7 @@ namespace ProjectDarkness
 
         private void LateUpdate()
         {
-            if (InventoryManager.Instance.InventoryUI.IsOpen || LevelManager.Instance.IsTransitioning || HealthManager.Instance.IsDead)
+            if (InventoryManager.Instance.InventoryUI.IsOpen || LevelManager.Instance.IsTransitioning || HealthManager.Instance.IsDead || (GameManager.Instance != null && GameManager.Instance.GameComplete))
             {
                 return;
             }

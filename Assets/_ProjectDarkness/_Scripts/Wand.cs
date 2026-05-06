@@ -43,12 +43,7 @@ namespace ProjectDarkness
             RegenerateMana();
             UpdateTimers();
 
-            if (_wandData == null || CastPoint == null)
-            {
-                return;
-            }
-
-            if (!GameInput.Instance.IsHoldingDownCastSpell || InventoryManager.Instance.InventoryUI.IsOpen || LevelManager.Instance.IsTransitioning || Time.timeScale == 0f || HealthManager.Instance.IsDead)
+            if (!GameInput.Instance.IsHoldingDownCastSpell || InventoryManager.Instance.InventoryUI.IsOpen || LevelManager.Instance.IsTransitioning || Time.timeScale == 0f || HealthManager.Instance.IsDead || (GameManager.Instance != null && GameManager.Instance.GameComplete))
             {
                 return;
             }
