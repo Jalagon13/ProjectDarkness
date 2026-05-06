@@ -179,7 +179,7 @@ TextureImporter:
       name: mui_enemy_icon
       rect:
         serializedVersion: 2
-        x: 8
+        x: 7
         y: 35
         width: 4
         height: 4
@@ -193,6 +193,28 @@ TextureImporter:
       bones: []
       spriteID: 6bbe22eb56d5f48ffa7725569101f7bf
       internalID: 1591602921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mui_boss_icon
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 32
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83ea0989a5c9f46d29647f16b682e621
+      internalID: -1933682941
       vertices: []
       indices: 
       edges: []
@@ -211,6 +233,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      mui_boss_icon: -1933682941
       mui_enemy_icon: 1591602921
       mui_player_icon: 1011627672
       mui_unvisted_room: -1439572569

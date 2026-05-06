@@ -37,7 +37,10 @@ namespace ProjectDarkness
         public Vector2Int StartPos => _startPos;
         
         private Dictionary <Vector2Int, RoomEntry> _floorPlan;
-        private readonly Dictionary<Vector2Int, Room> _spawnedRooms = new();
+        public Dictionary<Vector2Int, RoomEntry> FloorPlan => _floorPlan;
+        
+        private Dictionary<Vector2Int, Room> _spawnedRooms = new();
+        
         private RoomEntry _currentActiveRoomEntry;
         public RoomEntry CurrentActiveRoomEntry => _currentActiveRoomEntry;
         
@@ -87,7 +90,6 @@ namespace ProjectDarkness
                     { _startPos, new RoomEntry(_startPos) }
                 };
 
-                List<Vector2Int> deadEnds = new List<Vector2Int>();
                 Queue<Vector2Int> queue = new Queue<Vector2Int>();
                 queue.Enqueue(_startPos);
 
@@ -98,7 +100,6 @@ namespace ProjectDarkness
                 while (queue.Count > 0 && _floorPlan.Count < numberOfRooms)
                 {
                     Vector2Int current = queue.Dequeue();
-                    bool addedAny = false;
 
                     // Shuffle directions to prevent directional bias
                     for (int i = 0; i < directions.Length; i++)
@@ -144,12 +145,6 @@ namespace ProjectDarkness
                         // Mark neighbor and add to queue
                         _floorPlan.Add(neighbor, new RoomEntry(neighbor));
                         queue.Enqueue(neighbor);
-                        addedAny = true;
-                    }
-
-                    if (!addedAny)
-                    {
-                        deadEnds.Add(current);
                     }
 
                     // Reseed queue if it empties before reaching numberOfRooms
@@ -170,7 +165,6 @@ namespace ProjectDarkness
                 {
                     continue; // Retry from the start
                 }
-
 
                 Debug.Log($"Generated Room Level with {_floorPlan.Count} rooms in {retries} attempts.");
                 break;
@@ -200,17 +194,58 @@ namespace ProjectDarkness
 
         private void GenerateRoomTypeData()
         {
+            Dictionary<Vector2Int, RoomEntry> deadEnds = new();
+        
             foreach (var kvp in _floorPlan)
             {
                 if(kvp.Value.RoomCoord == _startPos)
                 {
                     kvp.Value.SetRoomType(RoomType.StartingRoom);
+                    continue;
                 }
-                else
+                else if(RoomIsDeadEnd(kvp.Value))
                 {
-                    kvp.Value.SetRoomType(RoomType.CombatRoom);
+                    deadEnds.Add(kvp.Key, kvp.Value);
+                }
+                
+                kvp.Value.SetRoomType(RoomType.CombatRoom);
+            }
+            
+            // Find the furthest dead end and make it always a boss room
+            RoomEntry furthestDeadEnd = null;
+            float maxDistance = -1f;
+            
+            foreach (var kvp in deadEnds)
+            {
+                Vector2Int deadEndPos = kvp.Key;
+                RoomEntry deadEnd = kvp.Value;
+
+                float distance = (deadEndPos - _startPos).sqrMagnitude;
+                if (distance > maxDistance)
+                {
+                    maxDistance = distance;
+                    furthestDeadEnd = deadEnd;
                 }
             }
+
+            furthestDeadEnd?.SetRoomType(RoomType.BossRoom);         
+        }
+
+        private bool RoomIsDeadEnd(RoomEntry value)
+        {
+            Vector2Int[] directions = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right};
+            
+            int connections = 0;
+            
+            foreach (Vector2Int dir in directions)
+            {
+                if(_floorPlan.ContainsKey(value.RoomCoord + dir))
+                {
+                    connections++;
+                }
+            }
+            
+            return connections == 1;
         }
 
         private void GenerateRooms()
@@ -296,7 +331,8 @@ namespace ProjectDarkness
                 case RoomType.CombatRoom:
                     return _combatRoomPool.GetRandomRoomFromPool();
                 case RoomType.BossRoom:
-                    break;
+                    // Falling back to combat room until you have a Boss prefab
+                    return _combatRoomPool.GetRandomRoomFromPool();
                 case RoomType.Shoproom:
                     break;
             }
