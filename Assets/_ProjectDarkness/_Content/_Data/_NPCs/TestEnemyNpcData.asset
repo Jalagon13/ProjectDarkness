@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792ea18211ad14d6dbf92fbf77470171, type: 3}
+  m_Name: TestEnemyNpcData
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.NpcData
+  <BaseHealth>k__BackingField: 10
+  <BaseSpeed>k__BackingField: 5
+  <BaseAttack>k__BackingField: 5
+  <BaseAttackKnockback>k__BackingField: 5
+  <BaseDefense>k__BackingField: 0
+  KnockbackResist: 0
+  CanMove: 0
+  IFrameDuration: 0.17
+  CanBeKnockedBack: 1
+  CanDie: 1
+  IsCombatNpc: 1
+  StringID: testEnemy
+  NpcPrefab: {fileID: 0}
+  HurtSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  DeathSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

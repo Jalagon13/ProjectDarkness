@@ -41,6 +41,7 @@ namespace ProjectDarkness
         public Dictionary<Vector2Int, RoomEntry> FloorPlan => _floorPlan;
         
         private Dictionary<Vector2Int, Room> _spawnedRooms = new();
+        public Dictionary<Vector2Int, Room> SpawnedRooms => _spawnedRooms;
         
         private RoomEntry _currentActiveRoomEntry;
         public RoomEntry CurrentActiveRoomEntry => _currentActiveRoomEntry;

@@ -5,6 +5,7 @@ namespace ProjectDarkness
 {
     public class Npc : MonoBehaviour
     {
+        public event EventHandler<EventArgs> OnHealthUpdated;
         public event EventHandler<EventArgs> OnDeath;
     
         [field:SerializeField] public NpcData Data { get; private set; }
@@ -33,7 +34,12 @@ namespace ProjectDarkness
             if (_currentHealth <= 0f)
             {
                 _currentHealth = 0f;
+                OnHealthUpdated?.Invoke(this, EventArgs.Empty);
                 Die();
+            }
+            else
+            {
+                OnHealthUpdated?.Invoke(this, EventArgs.Empty);
             }
         }
 

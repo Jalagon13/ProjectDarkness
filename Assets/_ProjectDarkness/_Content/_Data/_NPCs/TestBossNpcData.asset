@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 792ea18211ad14d6dbf92fbf77470171, type: 3}
-  m_Name: TestNpcData
+  m_Name: TestBossNpcData
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.NpcData
-  <BaseHealth>k__BackingField: 10
+  <BaseHealth>k__BackingField: 30
   <BaseSpeed>k__BackingField: 5
   <BaseAttack>k__BackingField: 5
   <BaseAttackKnockback>k__BackingField: 5
@@ -23,7 +23,7 @@ MonoBehaviour:
   CanBeKnockedBack: 1
   CanDie: 1
   IsCombatNpc: 1
-  StringID: test
+  StringID: testBoss
   NpcPrefab: {fileID: 0}
   HurtSound:
     Guid:
