@@ -13,10 +13,14 @@ namespace ProjectDarkness
         
         public event Action OnRoomTransitionStart;
         public event Action OnRoomTransitionEnd;
+        public event Action OnRoomSetActive;
+        public event Action<Vector2Int> OnRoomSpawned;
 
         [Header("Level Creation")]
         [SerializeField] private int _level = 1;
         [SerializeField] private int _roomLength = 22;
+        public int RoomLength => _roomLength;
+
         [SerializeField] private int _floorPlanGridXLength = 8;
         [SerializeField] private int _floorPlanGridYLength = 9;
         
@@ -30,13 +34,15 @@ namespace ProjectDarkness
         [SerializeField] private float _fadeToClearDuration = 0.5f;
 
         private Vector2Int _startPos = new();
+        public Vector2Int StartPos => _startPos;
+        
         private Dictionary <Vector2Int, RoomEntry> _floorPlan;
         private readonly Dictionary<Vector2Int, Room> _spawnedRooms = new();
         private RoomEntry _currentActiveRoomEntry;
+        public RoomEntry CurrentActiveRoomEntry => _currentActiveRoomEntry;
         
         private bool _isTransitioning;
         public bool IsTransitioning => _isTransitioning;
-
 
         private void Awake()
         {
@@ -276,6 +282,7 @@ namespace ProjectDarkness
             newRoom.gameObject.SetActive(false);
 
             _spawnedRooms.Add(roomCoord, newRoom);
+            OnRoomSpawned?.Invoke(roomCoord);
         }
         
         private Room GetRoomPrefab(Vector2Int roomCoord)
@@ -320,6 +327,8 @@ namespace ProjectDarkness
         
             _currentActiveRoomEntry = incomingRoomEntry;
             SetRoomActive(incomingRoomEntry.RoomCoord, true);
+
+            OnRoomSetActive?.Invoke();
         }
         
         private void SetRoomActive(Vector2Int roomCoord, bool isActive)

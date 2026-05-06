@@ -11,6 +11,8 @@ namespace ProjectDarkness
 
         private readonly Vector2Int _roomCoord;
         public Vector2Int RoomCoord => _roomCoord;
+        public Vector2Int WorldSpaceCoord => _roomCoord * LevelManager.Instance.RoomLength;
+
         public RoomType RoomType { get; private set; }
         
         public RoomEntry(Vector2Int roomCoord)

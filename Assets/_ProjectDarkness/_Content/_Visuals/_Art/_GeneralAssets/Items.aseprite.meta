@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b8692111d5a4641609fdfe41fa180889
+guid: 2778784b1ebeb4998b3ff7a0389e29ed
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,7 +129,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Items
     originalName: 
-    pivot: {x: 0.45454547, y: -0.083333336}
+    pivot: {x: 0.4, y: -0.2}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -137,9 +137,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 11
-      height: 12
-    spriteID: ec9045d726be74f95ab0acb1951b0c99
+      width: 10
+      height: 10
+    spriteID: 037cb9bb4fffe4899a111b2fa66ce39f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -167,11 +167,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 3
-        y: 1
-        width: 11
-        height: 12
-      spriteId: ec9045d726be74f95ab0acb1951b0c99
+        x: 4
+        y: 2
+        width: 10
+        height: 10
+      spriteId: 037cb9bb4fffe4899a111b2fa66ce39f
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
