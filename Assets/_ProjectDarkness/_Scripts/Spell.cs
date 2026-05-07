@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ProjectDarkness
@@ -8,8 +9,8 @@ namespace ProjectDarkness
 
         private Vector3 _travelDirection;
         private Vector3 _lastPosition;
-        private float _distanceTravelled;
         private bool _isActive;
+        private Timer _lifetimeTimer;
 
         private void Awake()
         {
@@ -22,6 +23,8 @@ namespace ProjectDarkness
             {
                 return;
             }
+
+            _lifetimeTimer?.Tick(Time.deltaTime);
 
             float frameDistance = Data.Speed * Time.deltaTime;
             if (frameDistance <= 0f)
@@ -36,13 +39,7 @@ namespace ProjectDarkness
             }
 
             transform.position += _travelDirection * frameDistance;
-            _distanceTravelled += frameDistance;
             _lastPosition = transform.position;
-
-            if (_distanceTravelled >= Data.Distance)
-            {
-                Destroy(gameObject);
-            }
         }
 
         public void Cast(Vector3 direction)
@@ -55,9 +52,19 @@ namespace ProjectDarkness
             }
 
             transform.forward = _travelDirection;
-            _distanceTravelled = 0f;
+            
+            _lifetimeTimer = new Timer(Data.Lifetime);
+            _lifetimeTimer.OnTimerEnd += OnLifetimeTimerEnd;
+
             _lastPosition = transform.position;
             _isActive = true;
+        }
+
+        private void OnLifetimeTimerEnd(object sender, EventArgs e)
+        {
+            _lifetimeTimer.OnTimerEnd -= OnLifetimeTimerEnd;
+            
+            Destroy(gameObject);
         }
     }
 }

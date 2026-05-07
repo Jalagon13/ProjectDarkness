@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b387b08cffef14d998d90fcfaf870f0b, type: 3}
   m_Name: WoodWandData
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.WandData
+  <WandName>k__BackingField: Wood Wand
   <ManaAmount>k__BackingField: 80
-  <ManaRegenRatePerSec>k__BackingField: 10
+  <ManaRegenPerSec>k__BackingField: 10
   <CastDelayTime>k__BackingField: 0.2
   <CooldownTime>k__BackingField: 0.5
+  <Scatter>k__BackingField: 0
   <Capacity>k__BackingField: 3

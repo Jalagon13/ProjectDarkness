@@ -10,10 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff11fb0d4ec9472b87db6025450d27b4, type: 3}
-  m_Name: BasicSpellData
+  m_Name: EnergyOrbSpellData
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.SpellData
+  <SpellName>k__BackingField: Energy Orb
   <SpellPrefab>k__BackingField: {fileID: 7238224538603127218, guid: d3f149549efbd4c7a89f2459844b5287, type: 3}
   <UiDisplay>k__BackingField: {fileID: 21300008, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
-  <Speed>k__BackingField: 20
-  <Distance>k__BackingField: 10
-  <ManaReq>k__BackingField: 3
+  <ManaDrain>k__BackingField: 3
+  <CastDelayTime>k__BackingField: 0.2
+  <Speed>k__BackingField: 15
+  <Lifetime>k__BackingField: 1
+  <Scatter>k__BackingField: 0
+  <Damage>k__BackingField: 10
+  <PierceCount>k__BackingField: 0
+  <BounceCount>k__BackingField: 0
+  <Knockback>k__BackingField: 3

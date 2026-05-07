@@ -97,7 +97,7 @@ namespace ProjectDarkness
                 return;
             }
 
-            if (_currentMana < spellData.ManaReq)
+            if (_currentMana < spellData.ManaDrain)
             {
                 return;
             }
@@ -107,7 +107,7 @@ namespace ProjectDarkness
                 return;
             }
 
-            UpdateCurrentMana(_currentMana - spellData.ManaReq);
+            UpdateCurrentMana(_currentMana - spellData.ManaDrain);
             AdvanceSequence(spellIndex);
         }
 
@@ -176,7 +176,7 @@ namespace ProjectDarkness
                 return;
             }
 
-            UpdateCurrentMana(_currentMana + (_wandData.ManaRegenRatePerSec * Time.deltaTime));
+            UpdateCurrentMana(_currentMana + (_wandData.ManaRegenPerSec * Time.deltaTime));
         }
 
         private void UpdateTimers()
