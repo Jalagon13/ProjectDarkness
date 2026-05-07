@@ -31,6 +31,18 @@ namespace ProjectDarkness
             get { return _duration; }
         }
 
+        public void StartTimer()
+        {
+            Reset();
+            IsPaused = false;
+        }
+
+        public void StopTimer()
+        {
+            RemainingSeconds = 0f;
+            IsPaused = false;
+        }
+
         public bool IsRunning()
         {
             return _remainingSeconds > 0f && !IsPaused;

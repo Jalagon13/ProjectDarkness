@@ -8,16 +8,14 @@ namespace ProjectDarkness
     public class SpellData : ScriptableObject
     {
         [field: SerializeField] public string SpellName { get; private set; }
-        [field: SerializeField] public Spell SpellPrefab { get; private set; }
+        [field: SerializeField, Required] public Spell SpellPrefab { get; private set; }
         [field: SerializeField] public Sprite UiDisplay { get; private set; }
 
         [field: PropertySpace(5)]
         [field: Header("Spell Base Stats")]
         [field: SerializeField] public int ManaDrain { get; private set; } = 10;
-        [field: SerializeField] public float CastDelayTime { get; private set; } = 0.2f;
         [field: SerializeField] public float Speed { get; private set; } = 10f;
         [field: SerializeField] public float Lifetime { get; private set; } = 10f;
-        [field: SerializeField] public float Scatter { get; private set; } = 0;
         
         [field: PropertySpace(5)]
         [field: Header("Combat Stats")]

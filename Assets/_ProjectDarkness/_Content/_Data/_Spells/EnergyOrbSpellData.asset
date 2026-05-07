@@ -16,10 +16,8 @@ MonoBehaviour:
   <SpellPrefab>k__BackingField: {fileID: 7238224538603127218, guid: d3f149549efbd4c7a89f2459844b5287, type: 3}
   <UiDisplay>k__BackingField: {fileID: 21300008, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
   <ManaDrain>k__BackingField: 3
-  <CastDelayTime>k__BackingField: 0.2
-  <Speed>k__BackingField: 15
-  <Lifetime>k__BackingField: 1
-  <Scatter>k__BackingField: 0
+  <Speed>k__BackingField: 20
+  <Lifetime>k__BackingField: 0.75
   <Damage>k__BackingField: 10
   <PierceCount>k__BackingField: 0
   <BounceCount>k__BackingField: 0

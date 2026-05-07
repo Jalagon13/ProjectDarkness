@@ -30,7 +30,7 @@ namespace ProjectDarkness
         
         public void RegisterCombatNpc(Npc npc)
         {
-            Debug.Log($"Registering NPC {npc.gameObject.name}");
+            // Debug.Log($"Registering NPC {npc.gameObject.name}");
             _combatNpcs.Add(npc);
             npc.OnDeath += OnNpcDeath;
         }
