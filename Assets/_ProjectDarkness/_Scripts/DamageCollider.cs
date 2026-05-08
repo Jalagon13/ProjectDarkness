@@ -4,11 +4,11 @@ namespace ProjectDarkness
 {
     public class DamageCollider : MonoBehaviour
     {
-        private Spell _spell;
+        private ProjectileSpell _spell;
     
         private void Awake()
         {
-            if(transform.root.TryGetComponent(out Spell spell))
+            if(transform.root.TryGetComponent(out ProjectileSpell spell))
             {
                 _spell = spell;
             }
@@ -19,7 +19,7 @@ namespace ProjectDarkness
             if(other.TryGetComponent(out Npc npc))
             {
                 Debug.Log($"Found NPC {npc.gameObject.name}");
-                npc.TakeDamage(_spell.Data.Damage);
+                npc.TakeDamage(_spell.RuntimeData.Damage);
             }
         }
     }

@@ -3269,8 +3269,7 @@ MonoBehaviour:
   _initialDelay: 0.25
   _delayBetweenItemsGiven: 0.2
   _startingItems:
-  - _spellData: {fileID: 11400000, guid: 77820f81f9ed4b8fb601eaad1a6af6af, type: 2}
-  - _spellData: {fileID: 11400000, guid: 77820f81f9ed4b8fb601eaad1a6af6af, type: 2}
+  - _spellData: {fileID: 11400000, guid: 7bb218a5cc56e41758b64859feb62359, type: 2}
 --- !u!114 &1346454177
 MonoBehaviour:
   m_ObjectHideFlags: 0

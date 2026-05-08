@@ -1,16 +1,21 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectDarkness
 {
-    public class Spell : MonoBehaviour
+    public class ProjectileSpell : MonoBehaviour
     {
-        [field: SerializeField] public SpellData Data { get; private set; }
+        [SerializeField] 
+        private GameObject _spellModifierHolder;
 
         private Vector3 _travelDirection;
         private Vector3 _lastPosition;
         private bool _isActive;
         private Timer _lifetimeTimer;
+        private ProjectileSpellRuntimeData _runtimeData;
+        public ProjectileSpellRuntimeData RuntimeData => _runtimeData;
+
 
         private void Awake()
         {
@@ -26,7 +31,7 @@ namespace ProjectDarkness
 
             _lifetimeTimer?.Tick(Time.deltaTime);
 
-            float frameDistance = Data.Speed * Time.deltaTime;
+            float frameDistance = _runtimeData.Speed * Time.deltaTime;
             if (frameDistance <= 0f)
             {
                 return;
@@ -42,6 +47,17 @@ namespace ProjectDarkness
             _lastPosition = transform.position;
         }
 
+        public void Initialize(CastContext castContext)
+        {
+            _runtimeData = new ProjectileSpellRuntimeData(castContext);
+
+            foreach (ModifierSpellData modifierData in castContext.Modifiers)
+            {
+                Instantiate(modifierData.ModifierSpellPrefab, _spellModifierHolder.transform);
+                Debug.Log($"Added Modifier Spell: {modifierData.SpellName} for Projectile Spell: {castContext.ProjectileSpell.SpellName}");
+            }
+        }
+
         public void Cast(Vector3 direction)
         {
             _travelDirection = direction.normalized;
@@ -53,7 +69,7 @@ namespace ProjectDarkness
 
             transform.forward = _travelDirection;
             
-            _lifetimeTimer = new Timer(Data.Lifetime);
+            _lifetimeTimer = new Timer(_runtimeData.Lifetime);
             _lifetimeTimer.OnTimerEnd += OnLifetimeTimerEnd;
 
             _lastPosition = transform.position;

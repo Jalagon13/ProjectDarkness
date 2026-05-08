@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a082f4961489451fa61730aedbab4d3, type: 3}
+  m_Name: DamageModSpellData
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.ModifierSpellData
+  <SpellName>k__BackingField: Damage Modifier
+  <UiDisplay>k__BackingField: {fileID: 21300012, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+  <ManaDrain>k__BackingField: 5
+  <ModifierSpellPrefab>k__BackingField: {fileID: 6780629981162205752, guid: 83890e6b726f240eca5b53ef2e00a64a, type: 3}
+  <FlatIntValue>k__BackingField: 10
+  <MultiplierValue>k__BackingField: 1.5

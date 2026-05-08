@@ -81,7 +81,7 @@ namespace ProjectDarkness
         private void TryCastCurrentSpell()
         {
             // Try to find a valid spell index with a spell
-            int spellIndex = GetNextOccupiedSpellIndex(_currentSequenceIndex);
+            int spellIndex = GetNextProjectileSpellIndex(_currentSequenceIndex);
             if (spellIndex < 0)
             {
                 if (_currentSequenceIndex > 0)
@@ -92,19 +92,37 @@ namespace ProjectDarkness
             }
 
             // Valid spell index found
-            SpellData spellData = _spellInventory[spellIndex].SpellData;
-            
-            if (_currentMana < spellData.ManaDrain)
+            ProjectileSpellData projectileSpellData = _spellInventory[spellIndex].SpellData as ProjectileSpellData;
+
+            // Checks for modifiers before this spell in the sequence, if found, add it to the cast context
+            CastContext castContext = BuildCastContextForSpell(spellIndex, projectileSpellData);
+
+            if (_currentMana < castContext.GetTotalManaCost())
             {
                 return;
             }
 
-            CastSpell(spellData);
-            UpdateCurrentMana(_currentMana - spellData.ManaDrain);
+            CastSpell(castContext);
+            UpdateCurrentMana(_currentMana - castContext.GetTotalManaCost());
             AdvanceSequence(spellIndex);
         }
 
-        private void CastSpell(SpellData spellData)
+        private CastContext BuildCastContextForSpell(int spellIndex, ProjectileSpellData mainProjectileSpell)
+        {
+            List<ModifierSpellData> modifiers = new();
+        
+            for(int i = 0; i < spellIndex; i++)
+            {
+                if(_spellInventory[i].HasSpell && _spellInventory[i].SpellData is ModifierSpellData modifier)
+                {
+                    modifiers.Add(modifier);
+                }
+            }
+            
+            return new CastContext(modifiers, mainProjectileSpell);
+        }
+
+        private void CastSpell(CastContext castContext)
         {
             Camera mainCamera = Camera.main;
 
@@ -122,8 +140,8 @@ namespace ProjectDarkness
                 projectileDirection = CastPoint.forward;
             }
 
-            Spell spell = Instantiate(spellData.SpellPrefab, CastPoint.position, Quaternion.LookRotation(projectileDirection));
-
+            ProjectileSpell spell = Instantiate(castContext.ProjectileSpell.ProjectileSpellPrefab, CastPoint.position, Quaternion.LookRotation(projectileDirection));
+            spell.Initialize(castContext);
             spell.Cast(projectileDirection);
         }
 
@@ -131,7 +149,7 @@ namespace ProjectDarkness
         {
             _currentSequenceIndex = currentSpellIndex + 1;
 
-            if (GetNextOccupiedSpellIndex(_currentSequenceIndex) >= 0)
+            if (GetNextProjectileSpellIndex(_currentSequenceIndex) >= 0)
             {
                 _castDelayTimer.StartTimer();
                 return;
@@ -140,11 +158,11 @@ namespace ProjectDarkness
             StartCooldown();
         }
 
-        private int GetNextOccupiedSpellIndex(int startIndex)
+        private int GetNextProjectileSpellIndex(int startIndex)
         {
             for (int i = Mathf.Max(0, startIndex); i < _spellInventory.Count; i++)
             {
-                if (_spellInventory[i] != null && _spellInventory[i].HasSpell)
+                if (_spellInventory[i] != null && _spellInventory[i].HasSpell && _spellInventory[i].SpellData is ProjectileSpellData)
                 {
                     return i;
                 }
