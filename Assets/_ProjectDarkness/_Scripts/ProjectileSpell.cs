@@ -13,6 +13,7 @@ namespace ProjectDarkness
         private Vector3 _lastPosition;
         private bool _isActive;
         private Timer _lifetimeTimer;
+        
         private ProjectileSpellRuntimeData _runtimeData;
         public ProjectileSpellRuntimeData RuntimeData => _runtimeData;
 
@@ -53,7 +54,9 @@ namespace ProjectDarkness
 
             foreach (ModifierSpellData modifierData in castContext.Modifiers)
             {
-                Instantiate(modifierData.ModifierSpellPrefab, _spellModifierHolder.transform);
+                ModifierSpell modifierSpell = Instantiate(modifierData.ModifierSpellPrefab, _spellModifierHolder.transform);
+                modifierSpell.ModifySpell(this, modifierData);
+                
                 Debug.Log($"Added Modifier Spell: {modifierData.SpellName} for Projectile Spell: {castContext.ProjectileSpell.SpellName}");
             }
         }

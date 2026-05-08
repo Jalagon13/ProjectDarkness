@@ -15,6 +15,6 @@ MonoBehaviour:
   <SpellName>k__BackingField: Damage Modifier
   <UiDisplay>k__BackingField: {fileID: 21300012, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
   <ManaDrain>k__BackingField: 5
-  <ModifierSpellPrefab>k__BackingField: {fileID: 6780629981162205752, guid: 83890e6b726f240eca5b53ef2e00a64a, type: 3}
+  <ModifierSpellPrefab>k__BackingField: {fileID: 5690220478401011521, guid: 83890e6b726f240eca5b53ef2e00a64a, type: 3}
   <FlatIntValue>k__BackingField: 10
   <MultiplierValue>k__BackingField: 1.5
