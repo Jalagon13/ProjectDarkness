@@ -9,7 +9,7 @@ namespace ProjectDarkness
     {
         private CombatRoomState _combatRoomState = CombatRoomState.HasEnemies;
         private List<Npc> _combatNpcs = new();
-    
+        
         protected override void OnFirstVisit()
         {
             base.OnFirstVisit();

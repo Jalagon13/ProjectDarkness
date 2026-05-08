@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ProjectDarkness
 {
+    [RequireComponent(typeof(RoomNavMeshHandler))]
     public class Room : MonoBehaviour
     {
         [field: SerializeField] public Wall NorthWall { get; private set; }
@@ -11,6 +12,13 @@ namespace ProjectDarkness
         [field: SerializeField] public Wall WestWall { get; private set; }
 
         [HideInInspector] public bool HasBeenVisited = false;
+        
+        private RoomNavMeshHandler _roomNavMeshHandler;
+        
+        private void Awake()
+        {
+            _roomNavMeshHandler = GetComponent<RoomNavMeshHandler>();
+        }
 
         public void Initialize(RoomEntry roomEntry)
         {
@@ -30,11 +38,13 @@ namespace ProjectDarkness
             }
 
             Debug.Log($"Entering {gameObject.name}");
+            _roomNavMeshHandler.BuildNavMesh();
         }
         
-        public virtual void OnRoomExist()
+        public virtual void OnRoomExit()
         {
             Debug.Log($"Exiting {gameObject.name}");
+            _roomNavMeshHandler.ClearNavMesh();
         }
         
         protected virtual void OnFirstVisit()

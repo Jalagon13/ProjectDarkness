@@ -3320,6 +3320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.DamagePopupManager
   _damagePopupPrefab: {fileID: 4100000000000000004, guid: 5f048117303d44778dfbc8eb0e9fe22d, type: 3}
   _popupParent: {fileID: 571760882}
+  _spawnPositionRandomOffsetRadius: 0.25
 --- !u!1 &1373241567
 GameObject:
   m_ObjectHideFlags: 0

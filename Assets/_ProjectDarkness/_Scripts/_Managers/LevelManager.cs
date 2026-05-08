@@ -380,7 +380,7 @@ namespace ProjectDarkness
             }
             else
             {
-                room.OnRoomExist();
+                room.OnRoomExit();
                 room.gameObject.SetActive(isActive);
             }
         }

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d117dbb5909a4fa1930c0d9dc3ffde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.ChaserNpc
+  <Data>k__BackingField: {fileID: 11400000, guid: bb7fb071360ec478eb4a129c931680c1, type: 2}
 --- !u!1 &6016497828843674787
 GameObject:
   m_ObjectHideFlags: 0
