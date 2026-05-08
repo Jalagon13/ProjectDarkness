@@ -8,7 +8,8 @@ namespace ProjectDarkness
         public event EventHandler<EventArgs> OnHealthUpdated;
         public event EventHandler<EventArgs> OnDeath;
     
-        [field:SerializeField] public NpcData Data { get; private set; }
+        [field:SerializeField] 
+        public NpcData Data { get; private set; }
 
         private float _currentHealth;
 

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2913147988624995105}
   - component: {fileID: 8273118402102133169}
   - component: {fileID: 5946870290749054351}
-  - component: {fileID: 8638997743910515689}
+  - component: {fileID: 3353947085039690847}
   m_Layer: 0
-  m_Name: TestEnemyNpc
+  m_Name: ChaserNpc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8638997743910515689
+--- !u!114 &3353947085039690847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,10 +95,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 573846946751677844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec2ca3fef258b4e5c8e3e19ae5b47483, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d117dbb5909a4fa1930c0d9dc3ffde1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.Npc
-  <Data>k__BackingField: {fileID: 11400000, guid: bb7fb071360ec478eb4a129c931680c1, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.ChaserNpc
 --- !u!1 &6016497828843674787
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca5e76866d98406e9904c4115778df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.Billboard
+  _faceCameraAtAnyAngle: 0
 --- !u!1 &6814623352875948416
 GameObject:
   m_ObjectHideFlags: 0
