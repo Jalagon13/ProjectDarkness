@@ -81,7 +81,8 @@ namespace ProjectDarkness
                 return;
             }
 
-            npc.TakeDamage(_runtimeData.Damage);
+            Vector3 hitPoint = other.ClosestPoint(transform.position);
+            npc.TakeDamage(_runtimeData.Damage, hitPoint);
             OnProjectileHitNpc?.Invoke(this, npc);
             EndProjectile(ProjectileDestroyReason.NpcHit);
         }
@@ -95,7 +96,10 @@ namespace ProjectDarkness
 
             if (TryGetNpc(collision.collider, out Npc npc))
             {
-                npc.TakeDamage(_runtimeData.Damage);
+                Vector3 hitPoint = collision.contactCount > 0
+                    ? collision.GetContact(0).point
+                    : collision.collider.ClosestPoint(transform.position);
+                npc.TakeDamage(_runtimeData.Damage, hitPoint);
                 OnProjectileHitNpc?.Invoke(this, npc);
                 EndProjectile(ProjectileDestroyReason.NpcHit);
                 return;

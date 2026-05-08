@@ -26,10 +26,17 @@ namespace ProjectDarkness
 
         public void TakeDamage(float damageAmount)
         {
+            TakeDamage(damageAmount, GetDefaultDamagePopupPosition());
+        }
+
+        public void TakeDamage(float damageAmount, Vector3 damageWorldPosition)
+        {
             // Apply defense from Data, ensuring damage doesn't go below 1
             float finalDamage = Mathf.Max(1f, damageAmount - Data.BaseDefense);
-            Debug.Log($"Npc {gameObject.name} damaged by {finalDamage}");
+            
             _currentHealth -= finalDamage;
+
+            DamagePopupManager.Instance?.ShowDamagePopup(Mathf.RoundToInt(finalDamage), damageWorldPosition);
 
             if (_currentHealth <= 0f)
             {
@@ -52,6 +59,16 @@ namespace ProjectDarkness
             Debug.Log($"Npc {gameObject.name} died");
             OnDeath?.Invoke(this, EventArgs.Empty);
             Destroy(gameObject);
-        }    
+        }
+
+        private Vector3 GetDefaultDamagePopupPosition()
+        {
+            if (TryGetComponent(out Collider npcCollider))
+            {
+                return npcCollider.bounds.center;
+            }
+
+            return transform.position + Vector3.up;
+        }
     }
 }

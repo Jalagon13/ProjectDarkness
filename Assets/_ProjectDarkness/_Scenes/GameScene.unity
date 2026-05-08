@@ -3205,6 +3205,7 @@ GameObject:
   - component: {fileID: 1346454176}
   - component: {fileID: 1346454177}
   - component: {fileID: 1346454178}
+  - component: {fileID: 1346454179}
   m_Layer: 0
   m_Name: LOCAL_MANAGERS
   m_TagString: Untagged
@@ -3305,6 +3306,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.HealthManager
   _startingMaxHealth: 100
+--- !u!114 &1346454179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346454172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55390d95b0fb4316aa6d374fd751a28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.DamagePopupManager
+  _damagePopupPrefab: {fileID: 4100000000000000004, guid: 5f048117303d44778dfbc8eb0e9fe22d, type: 3}
+  _popupParent: {fileID: 571760882}
 --- !u!1 &1373241567
 GameObject:
   m_ObjectHideFlags: 0
