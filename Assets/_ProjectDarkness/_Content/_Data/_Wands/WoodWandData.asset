@@ -17,5 +17,5 @@ MonoBehaviour:
   <ManaRegenPerSec>k__BackingField: 10
   <CastDelayTime>k__BackingField: 0.2
   <CooldownTime>k__BackingField: 0.5
-  <Scatter>k__BackingField: 1
+  <Scatter>k__BackingField: 0.75
   <Capacity>k__BackingField: 3

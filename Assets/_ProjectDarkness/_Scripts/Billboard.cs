@@ -4,6 +4,9 @@ namespace ProjectDarkness
 {
     public class Billboard : MonoBehaviour
     {
+        [SerializeField]
+        private bool _faceCameraAtAnyAngle;
+
         private Camera _mainCamera;
     
         private void Start()
@@ -13,9 +16,21 @@ namespace ProjectDarkness
     
         private void LateUpdate()
         {
+            if (_mainCamera == null)
+            {
+                _mainCamera = Camera.main;
+                if (_mainCamera == null)
+                {
+                    return;
+                }
+            }
+
             Vector3 cameraPosition = _mainCamera.transform.position;
-            
-            cameraPosition.y = transform.position.y;
+
+            if (!_faceCameraAtAnyAngle)
+            {
+                cameraPosition.y = transform.position.y;
+            }
             
             transform.LookAt(cameraPosition);
             

@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 792ea18211ad14d6dbf92fbf77470171, type: 3}
-  m_Name: TestBossNpcData
+  m_Name: TestDummyNpcData
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.NpcData
-  <BaseHealth>k__BackingField: 30
-  <BaseSpeed>k__BackingField: 5
-  <BaseAttack>k__BackingField: 5
-  <BaseAttackKnockback>k__BackingField: 5
+  <BaseHealth>k__BackingField: 1
+  <BaseSpeed>k__BackingField: 0
+  <BaseAttack>k__BackingField: 0
+  <BaseAttackKnockback>k__BackingField: 0
   <BaseDefense>k__BackingField: 0
   KnockbackResist: 0
   CanMove: 0
   IFrameDuration: 0.17
   CanBeKnockedBack: 1
-  CanDie: 1
-  IsCombatNpc: 1
-  StringID: testBoss
-  NpcPrefab: {fileID: 573846946751677844, guid: 2d45519a545bb4cc89c19165ccdb9cc0, type: 3}
+  CanDie: 0
+  IsCombatNpc: 0
+  StringID: test dummy
+  NpcPrefab: {fileID: 573846946751677844, guid: b5b52224de7354669ae6509875fee542, type: 3}
   HurtSound:
     Guid:
       Data1: 0

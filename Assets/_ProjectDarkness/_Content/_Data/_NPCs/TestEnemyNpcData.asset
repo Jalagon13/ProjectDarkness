@@ -24,7 +24,7 @@ MonoBehaviour:
   CanDie: 1
   IsCombatNpc: 1
   StringID: testEnemy
-  NpcPrefab: {fileID: 0}
+  NpcPrefab: {fileID: 573846946751677844, guid: 665c7c86d2260405dbe4a710ba75481d, type: 3}
   HurtSound:
     Guid:
       Data1: 0
