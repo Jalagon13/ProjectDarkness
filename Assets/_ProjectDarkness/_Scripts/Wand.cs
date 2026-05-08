@@ -184,11 +184,6 @@ namespace ProjectDarkness
             }
         }
 
-        private bool IsValidSlotIndex(int slotIndex)
-        {
-            return slotIndex >= 0 && slotIndex < _spellInventory.Count;
-        }
-
         private void UpdateCurrentMana(float newManaAmount)
         {
             float clampedManaAmount = Mathf.Clamp(newManaAmount, 0f, _wandData.ManaAmount);
