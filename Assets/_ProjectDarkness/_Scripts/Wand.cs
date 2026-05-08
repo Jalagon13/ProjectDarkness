@@ -124,6 +124,15 @@ namespace ProjectDarkness
 
         private void CastSpell(CastContext castContext)
         {
+            Vector3 projectileDirection = CalculateProjectileDirection(castContext);
+
+            ProjectileSpell spell = Instantiate(castContext.ProjectileSpell.ProjectileSpellPrefab, CastPoint.position, Quaternion.LookRotation(projectileDirection));
+            spell.Initialize(castContext);
+            spell.Cast(projectileDirection);
+        }
+        
+        private Vector3 CalculateProjectileDirection(CastContext castContext)
+        {
             Camera mainCamera = Camera.main;
 
             Ray aimRay = new(mainCamera.transform.position, mainCamera.transform.forward);
@@ -140,9 +149,17 @@ namespace ProjectDarkness
                 projectileDirection = CastPoint.forward;
             }
 
-            ProjectileSpell spell = Instantiate(castContext.ProjectileSpell.ProjectileSpellPrefab, CastPoint.position, Quaternion.LookRotation(projectileDirection));
-            spell.Initialize(castContext);
-            spell.Cast(projectileDirection);
+            float totalScatter = Mathf.Max(0f, _wandData.Scatter + castContext.ProjectileSpell.Scatter);
+            if (totalScatter <= 0f)
+            {
+                return projectileDirection;
+            }
+
+            Vector2 scatterOffset = UnityEngine.Random.insideUnitCircle * totalScatter;
+            Quaternion baseRotation = Quaternion.LookRotation(projectileDirection);
+            Quaternion localSpread = Quaternion.AngleAxis(scatterOffset.x, baseRotation * Vector3.up) * Quaternion.AngleAxis(scatterOffset.y, baseRotation * Vector3.right);
+
+            return (localSpread * projectileDirection).normalized;
         }
 
         private void AdvanceSequence(int currentSpellIndex)

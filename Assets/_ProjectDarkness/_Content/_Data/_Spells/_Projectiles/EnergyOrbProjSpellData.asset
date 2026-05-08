@@ -18,7 +18,7 @@ MonoBehaviour:
   <ProjectileSpellPrefab>k__BackingField: {fileID: 7238224538603127218, guid: d3f149549efbd4c7a89f2459844b5287, type: 3}
   <Speed>k__BackingField: 20
   <Lifetime>k__BackingField: 0.75
-  <Scatter>k__BackingField: 5
+  <Scatter>k__BackingField: 0
   <Damage>k__BackingField: 10
   <PierceCount>k__BackingField: 0
   <BounceCount>k__BackingField: 0
