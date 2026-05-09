@@ -294,8 +294,6 @@ namespace ProjectDarkness
                     break;
             }
             
-            Debug.Log($"Player position: {Player.Instance.gameObject.transform.position}");
-
             yield return _transitionPanelUI.FadeToClear(_fadeToClearDuration).WaitForCompletion();
 
             OnRoomTransitionEnd?.Invoke();

@@ -1,3 +1,4 @@
+using System;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
@@ -12,12 +13,32 @@ namespace ProjectDarkness
         [field: SerializeField] public Wall WestWall { get; private set; }
 
         [HideInInspector] public bool HasBeenVisited = false;
+
+        public event Action OnNavMeshBuildStarted;
+        public event Action OnNavMeshBuildCompleted;
+        public event Action OnNavMeshCleared;
         
         private RoomNavMeshHandler _roomNavMeshHandler;
+        public bool IsNavMeshReady => _roomNavMeshHandler != null && _roomNavMeshHandler.IsNavMeshReady;
         
-        private void Awake()
+        protected virtual void Awake()
         {
             _roomNavMeshHandler = GetComponent<RoomNavMeshHandler>();
+            _roomNavMeshHandler.OnNavMeshBuildStarted += HandleNavMeshBuildStarted;
+            _roomNavMeshHandler.OnNavMeshBuildCompleted += HandleNavMeshBuildCompleted;
+            _roomNavMeshHandler.OnNavMeshCleared += HandleNavMeshCleared;
+        }
+
+        protected virtual void OnDestroy()
+        {
+            if (_roomNavMeshHandler == null)
+            {
+                return;
+            }
+
+            _roomNavMeshHandler.OnNavMeshBuildStarted -= HandleNavMeshBuildStarted;
+            _roomNavMeshHandler.OnNavMeshBuildCompleted -= HandleNavMeshBuildCompleted;
+            _roomNavMeshHandler.OnNavMeshCleared -= HandleNavMeshCleared;
         }
 
         public void Initialize(RoomEntry roomEntry)
@@ -50,6 +71,21 @@ namespace ProjectDarkness
         protected virtual void OnFirstVisit()
         {
             Debug.Log($"First visit to {gameObject.name}");
+        }
+
+        private void HandleNavMeshBuildStarted()
+        {
+            OnNavMeshBuildStarted?.Invoke();
+        }
+
+        private void HandleNavMeshBuildCompleted()
+        {
+            OnNavMeshBuildCompleted?.Invoke();
+        }
+
+        private void HandleNavMeshCleared()
+        {
+            OnNavMeshCleared?.Invoke();
         }
     }
 }

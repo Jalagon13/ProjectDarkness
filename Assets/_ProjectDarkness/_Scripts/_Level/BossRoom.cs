@@ -7,9 +7,11 @@ namespace ProjectDarkness
         [Header("Boss Room Settings")]
         [SerializeField] private Npc _bossNpc;
         public Npc BossNpc => _bossNpc;
-    
-        private void Awake()
+
+        protected override void Awake()
         {
+            base.Awake();
+        
             if(_bossNpc == null)
             {
                 Debug.LogError($"Boss should not be null for a bossroom");
