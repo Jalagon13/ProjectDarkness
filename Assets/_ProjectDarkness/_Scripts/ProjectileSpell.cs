@@ -108,16 +108,16 @@ namespace ProjectDarkness
             ResolveBounceOrDestroy(collision);
         }
 
-        public void Initialize(CastContext castContext)
+        public void Initialize(SpellBlock spellBlock)
         {
-            _runtimeData = new ProjectileSpellRuntimeData(castContext);
+            _runtimeData = new ProjectileSpellRuntimeData(spellBlock);
 
-            foreach (ModifierSpellData modifierData in castContext.Modifiers)
+            foreach (ModifierSpellData modifierData in spellBlock.Modifiers)
             {
                 ModifierSpell modifierSpell = Instantiate(modifierData.ModifierSpellPrefab, _spellModifierHolder.transform);
                 modifierSpell.ModifySpell(this, modifierData);
                 
-                Debug.Log($"Added Modifier Spell: {modifierData.SpellName} for Projectile Spell: {castContext.ProjectileSpell.SpellName}");
+                Debug.Log($"Added Modifier Spell: {modifierData.SpellName} for Projectile Spell: {spellBlock.ProjectileSpell.SpellName}");
             }
 
             _remainingBounces = _runtimeData.BounceCount;

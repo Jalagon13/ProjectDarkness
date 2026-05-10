@@ -12,7 +12,7 @@ namespace ProjectDarkness
         public bool IsPaused = false;
 
         private float _remainingSeconds;
-        private readonly float _duration;
+        private float _duration;
 
         public float PercentRemaining => _duration > 0 ? 1 - (_remainingSeconds / _duration) : 0;
 
@@ -29,6 +29,18 @@ namespace ProjectDarkness
         public float Duration
         {
             get { return _duration; }
+            set
+            {
+                value = Mathf.Max(value, 0f);
+                _duration = value;
+            }
+        }
+
+        public Timer(float duration)
+        {
+            _duration = duration;
+            _remainingSeconds = duration;
+            IsPaused = false;
         }
 
         public void StartTimer()
@@ -62,13 +74,6 @@ namespace ProjectDarkness
         public void Reset()
         {
             _remainingSeconds = _duration;
-        }
-
-        public Timer(float duration)
-        {
-            _duration = duration;
-            _remainingSeconds = duration;
-            IsPaused = false;
         }
 
         public void Tick(float deltaTime)

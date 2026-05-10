@@ -12,7 +12,6 @@ namespace ProjectDarkness
         [field: SerializeField] public float Speed { get; private set; } = 10f;
         [field: SerializeField] public float Lifetime { get; private set; } = 10f;
         [field: SerializeField] public float Scatter { get; private set; } = 0f;
-        [field: SerializeField] public float SpellChargeTime { get; private set; } = 0.15f;
 
         [field: PropertySpace(5)]
         [field: Header("Combat Stats")]

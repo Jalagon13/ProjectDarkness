@@ -13,15 +13,15 @@ namespace ProjectDarkness
         public int BounceCount { get; private set; }
         public int Knockback { get; private set; }
 
-        public ProjectileSpellRuntimeData(CastContext castContext)
+        public ProjectileSpellRuntimeData(SpellBlock spellBlock)
         {
-            Speed = castContext.ProjectileSpell.Speed;
-            Lifetime = castContext.ProjectileSpell.Lifetime;
-            Scatter = castContext.ProjectileSpell.Scatter;
-            Damage = castContext.ProjectileSpell.Damage;
-            PierceCount = castContext.ProjectileSpell.PierceCount;
-            BounceCount = castContext.ProjectileSpell.BounceCount;
-            Knockback = castContext.ProjectileSpell.Knockback;
+            Speed = spellBlock.ProjectileSpell.Speed;
+            Lifetime = spellBlock.ProjectileSpell.Lifetime;
+            Scatter = spellBlock.ProjectileSpell.Scatter;
+            Damage = spellBlock.ProjectileSpell.Damage;
+            PierceCount = spellBlock.ProjectileSpell.PierceCount;
+            BounceCount = spellBlock.ProjectileSpell.BounceCount;
+            Knockback = spellBlock.ProjectileSpell.Knockback;
         }
 
         public void AddSpeed(float value)

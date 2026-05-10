@@ -20,8 +20,6 @@ namespace ProjectDarkness
         private List<InventorySlot> _spellInventory = new();
         public List<InventorySlot> SpellInventory => _spellInventory;
         
-        private 
-
         private readonly float _aimRayDistance = 1000f;
         
         private float _currentMana;
@@ -33,25 +31,60 @@ namespace ProjectDarkness
         private Timer _cooldownTimer;
         public Timer CooldownTimer => _cooldownTimer;
         
-        private int _currentSequenceIndex;
-
+        private List<SpellBlock> _spellBlocks = new();
+        private int _currentBlockIndex;
 
         private void Awake()
         {
             _spellChargeTimer = new Timer(_wandData.SpellChargeTime);
             _spellChargeTimer.OnTimerEnd += SpellChargeTimer_OnTimerEnd;
             _cooldownTimer = new Timer(_wandData.CooldownTime);
-            _currentMana = _wandData != null ? _wandData.ManaAmount : 0f;
+            _currentMana = _wandData.ManaAmount;
             
             SyncInventoryCapacity();
+            CompileSpellBlocks();
             ResetCastingState();
             
             OnManaUpdated?.Invoke();
         }
 
+        private void Start()
+        {
+            if (_spellInventory != null)
+            {
+                foreach (InventorySlot slot in _spellInventory)
+                {
+                    if (slot != null)
+                    {
+                        slot.OnSlotChanged += CompileSpellBlocks;
+                    }
+                }
+            }
+        }
+
         private void OnValidate()
         {
             SyncInventoryCapacity();
+            CompileSpellBlocks();
+        }
+
+        private void OnDestroy()
+        {
+            if (_spellChargeTimer != null)
+            {
+                _spellChargeTimer.OnTimerEnd -= SpellChargeTimer_OnTimerEnd;
+            }
+
+            if (_spellInventory != null)
+            {
+                foreach (InventorySlot slot in _spellInventory)
+                {
+                    if (slot != null)
+                    {
+                        slot.OnSlotChanged -= CompileSpellBlocks;
+                    }
+                }
+            }
         }
 
         private void Update()
@@ -75,14 +108,6 @@ namespace ProjectDarkness
             }
         }
 
-        private void OnDestroy()
-        {
-            if (_spellChargeTimer != null)
-            {
-                _spellChargeTimer.OnTimerEnd -= SpellChargeTimer_OnTimerEnd;
-            }
-        }
-
         private bool CanMaintainSpellCharge()
         {
             if (!GameInput.Instance.IsHoldingDownCastSpell) return false;
@@ -98,16 +123,14 @@ namespace ProjectDarkness
 
         private bool ShouldStartSpellCharge()
         {
-            int spellIndex = GetNextProjectileSpellIndex(_currentSequenceIndex);
-            if (spellIndex < 0 || (_spellChargeTimer?.IsRunning() ?? false))
+            if (_currentBlockIndex >= _spellBlocks.Count || (_spellChargeTimer?.IsRunning() ?? false))
             {
                 return false;
             }
 
-            ProjectileSpellData projectileSpellData = _spellInventory[spellIndex].SpellData as ProjectileSpellData;
-            CastContext castContext = BuildCastContextForSpell(spellIndex, projectileSpellData);
+            SpellBlock currentBlock = _spellBlocks[_currentBlockIndex];
 
-            if (_currentMana < castContext.GetTotalManaCost())
+            if (_currentMana < currentBlock.GetTotalManaCost())
             {
                 return false;
             }
@@ -117,13 +140,14 @@ namespace ProjectDarkness
 
         private void StartSpellCharge()
         {
+            SpellBlock currentBlock = _spellBlocks[_currentBlockIndex];
+            _spellChargeTimer.Duration = currentBlock.TotalSpellChargeTime;
+
             if (_spellChargeTimer.Duration <= 0f)
             {
                 TryCastCurrentSpell();
                 return;
             }
-            
-            
 
             _spellChargeTimer.StartTimer();
         }
@@ -146,54 +170,34 @@ namespace ProjectDarkness
 
         private void TryCastCurrentSpell()
         {
-            int spellIndex = GetNextProjectileSpellIndex(_currentSequenceIndex);
-            if (spellIndex < 0)
+            if (_currentBlockIndex >= _spellBlocks.Count)
             {
-                if (_currentSequenceIndex > 0)
-                {
-                    StartCooldown();
-                }
+                StartCooldown();
                 return;
             }
 
-            ProjectileSpellData projectileSpellData = _spellInventory[spellIndex].SpellData as ProjectileSpellData;
-            CastContext castContext = BuildCastContextForSpell(spellIndex, projectileSpellData);
+            SpellBlock currentBlock = _spellBlocks[_currentBlockIndex];
 
-            if (_currentMana < castContext.GetTotalManaCost())
+            if (_currentMana < currentBlock.GetTotalManaCost())
             {
                 return;
             }
 
-            CastSpell(castContext);
-            UpdateCurrentMana(_currentMana - castContext.GetTotalManaCost());
-            AdvanceSequence(spellIndex);
+            CastSpell(currentBlock);
+            UpdateCurrentMana(_currentMana - currentBlock.GetTotalManaCost());
+            AdvanceSequence();
         }
 
-        private CastContext BuildCastContextForSpell(int spellIndex, ProjectileSpellData mainProjectileSpell)
+        private void CastSpell(SpellBlock spellBlock)
         {
-            List<ModifierSpellData> modifiers = new();
-        
-            for(int i = 0; i < spellIndex; i++)
-            {
-                if(_spellInventory[i].HasSpell && _spellInventory[i].SpellData is ModifierSpellData modifier)
-                {
-                    modifiers.Add(modifier);
-                }
-            }
-            
-            return new CastContext(modifiers, mainProjectileSpell);
-        }
+            Vector3 projectileDirection = CalculateProjectileDirection(spellBlock);
 
-        private void CastSpell(CastContext castContext)
-        {
-            Vector3 projectileDirection = CalculateProjectileDirection(castContext);
-
-            ProjectileSpell spell = Instantiate(castContext.ProjectileSpell.ProjectileSpellPrefab, CastPoint.position, Quaternion.LookRotation(projectileDirection));
-            spell.Initialize(castContext);
+            ProjectileSpell spell = Instantiate(spellBlock.ProjectileSpell.ProjectileSpellPrefab, CastPoint.position, Quaternion.LookRotation(projectileDirection));
+            spell.Initialize(spellBlock);
             spell.Cast(projectileDirection);
         }
         
-        private Vector3 CalculateProjectileDirection(CastContext castContext)
+        private Vector3 CalculateProjectileDirection(SpellBlock spellBlock)
         {
             Camera mainCamera = Camera.main;
 
@@ -211,7 +215,7 @@ namespace ProjectDarkness
                 projectileDirection = CastPoint.forward;
             }
 
-            float totalScatter = Mathf.Max(0f, _wandData.Scatter + castContext.ProjectileSpell.Scatter);
+            float totalScatter = Mathf.Max(0f, _wandData.Scatter + spellBlock.ProjectileSpell.Scatter);
             if (totalScatter <= 0f)
             {
                 return projectileDirection;
@@ -224,42 +228,29 @@ namespace ProjectDarkness
             return (localSpread * projectileDirection).normalized;
         }
 
-        private void AdvanceSequence(int currentSpellIndex)
+        private void AdvanceSequence()
         {
-            _currentSequenceIndex = currentSpellIndex + 1;
+            _currentBlockIndex++;
 
-            if (GetNextProjectileSpellIndex(_currentSequenceIndex) < 0)
+            if (_currentBlockIndex >= _spellBlocks.Count)
             {
                 StartCooldown();
                 return;
             }
         }
 
-        private int GetNextProjectileSpellIndex(int startIndex)
-        {
-            for (int i = Mathf.Max(0, startIndex); i < _spellInventory.Count; i++)
-            {
-                if (_spellInventory[i] != null && _spellInventory[i].HasSpell && _spellInventory[i].SpellData is ProjectileSpellData)
-                {
-                    return i;
-                }
-            }
-
-            return -1;
-        }
-
         private void StartCooldown()
         {
             _cooldownTimer.StartTimer();
-            _currentSequenceIndex = 0;
+            _currentBlockIndex = 0;
             _spellChargeTimer.StopTimer();
         }
 
         private void ResetCastingState()
         {
-            _spellChargeTimer.StopTimer();
-            _cooldownTimer.StopTimer();
-            _currentSequenceIndex = 0;
+            _spellChargeTimer?.StopTimer();
+            _cooldownTimer?.StopTimer();
+            _currentBlockIndex = 0;
         }
 
         private void SyncInventoryCapacity()
@@ -277,6 +268,33 @@ namespace ProjectDarkness
             {
                 _spellInventory.RemoveAt(_spellInventory.Count - 1);
             }
+        }
+
+        public void CompileSpellBlocks()
+        {
+            Debug.Log($"Compiling Spell Blocks for Wand: {_wandData.WandName}");
+        
+            _spellBlocks.Clear();
+            List<ModifierSpellData> currentModifiers = new();
+
+            float wandChargeTime = _wandData.SpellChargeTime;
+
+            foreach (InventorySlot slot in _spellInventory)
+            {
+                if (slot == null || !slot.HasSpell) continue;
+
+                if (slot.SpellData is ModifierSpellData modifier)
+                {
+                    currentModifiers.Add(modifier);
+                }
+                else if (slot.SpellData is ProjectileSpellData projectile)
+                {
+                    _spellBlocks.Add(new SpellBlock(new List<ModifierSpellData>(currentModifiers), projectile, wandChargeTime));
+                    currentModifiers.Clear();
+                }
+            }
+            
+            ResetCastingState();
         }
 
         private void UpdateCurrentMana(float newManaAmount)

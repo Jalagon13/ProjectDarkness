@@ -15,6 +15,7 @@ MonoBehaviour:
   <SpellName>k__BackingField: Lightning Chain Modifier
   <UiDisplay>k__BackingField: {fileID: 21300006, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
   <ManaDrain>k__BackingField: 3
+  <SpellChargeTime>k__BackingField: 0.5
   <ModifierSpellPrefab>k__BackingField: {fileID: 4838856499369527276, guid: 1ef7c0002efe34f738561471caf70fc7, type: 3}
   <FlatIntValue>k__BackingField: 10
   <MultiplierValue>k__BackingField: 1.5
