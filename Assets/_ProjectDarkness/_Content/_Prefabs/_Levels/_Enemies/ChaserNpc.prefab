@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5946870290749054351}
   - component: {fileID: 7786375463039189975}
   - component: {fileID: 3353947085039690847}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChaserNpc
   m_TagString: Untagged
   m_Icon: {fileID: 0}

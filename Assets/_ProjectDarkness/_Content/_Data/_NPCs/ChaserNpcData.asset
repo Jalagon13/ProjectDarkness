@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792ea18211ad14d6dbf92fbf77470171, type: 3}
   m_Name: ChaserNpcData
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.NpcData
-  <BaseHealth>k__BackingField: 20
-  <BaseSpeed>k__BackingField: 5
+  <BaseHealth>k__BackingField: 100
+  <BaseSpeed>k__BackingField: 3.5
   <BaseAttack>k__BackingField: 5
   <BaseAttackKnockback>k__BackingField: 5
   <BaseDefense>k__BackingField: 0

@@ -177,6 +177,7 @@ namespace ProjectDarkness
             }
 
             _remainingBounces--;
+            _lifetimeTimer.AddTime(1f);
             _travelDirection = reflectedDirection;
             transform.forward = _travelDirection;
             ApplyVelocity(_travelDirection);

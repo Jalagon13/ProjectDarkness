@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectDarkness.WandData
   <WandName>k__BackingField: Wood Wand
   <ManaAmount>k__BackingField: 80
-  <ManaRegenPerSec>k__BackingField: 10
-  <CastDelayTime>k__BackingField: 0.2
-  <CooldownTime>k__BackingField: 0.5
+  <ManaRegenPerSec>k__BackingField: 20
+  <CastDelayTime>k__BackingField: 0.15
+  <CooldownTime>k__BackingField: 0.6
   <Scatter>k__BackingField: 0.75
-  <Capacity>k__BackingField: 3
+  <Capacity>k__BackingField: 6

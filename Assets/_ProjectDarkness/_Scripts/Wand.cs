@@ -20,7 +20,7 @@ namespace ProjectDarkness
         private List<InventorySlot> _spellInventory = new();
         public List<InventorySlot> SpellInventory => _spellInventory;
 
-        private float _aimRayDistance = 1000f;
+        private readonly float _aimRayDistance = 1000f;
         
         private float _currentMana;
         public float CurrentMana => _currentMana;
