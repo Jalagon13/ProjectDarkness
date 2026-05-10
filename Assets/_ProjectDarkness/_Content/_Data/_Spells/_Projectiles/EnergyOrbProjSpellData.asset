@@ -19,6 +19,7 @@ MonoBehaviour:
   <Speed>k__BackingField: 18
   <Lifetime>k__BackingField: 0.75
   <Scatter>k__BackingField: 0
+  <SpellChargeTime>k__BackingField: 0.15
   <Damage>k__BackingField: 10
   <PierceCount>k__BackingField: 0
   <BounceCount>k__BackingField: 3

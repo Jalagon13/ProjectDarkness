@@ -19,13 +19,16 @@ namespace ProjectDarkness
         [SerializeField] 
         private List<InventorySlot> _spellInventory = new();
         public List<InventorySlot> SpellInventory => _spellInventory;
+        
+        private 
 
         private readonly float _aimRayDistance = 1000f;
         
         private float _currentMana;
         public float CurrentMana => _currentMana;
         
-        private Timer _castDelayTimer;
+        private Timer _spellChargeTimer;
+        public Timer SpellChargeTimer => _spellChargeTimer;
         
         private Timer _cooldownTimer;
         public Timer CooldownTimer => _cooldownTimer;
@@ -35,7 +38,8 @@ namespace ProjectDarkness
 
         private void Awake()
         {
-            _castDelayTimer = new Timer(_wandData.CastDelayTime);
+            _spellChargeTimer = new Timer(_wandData.SpellChargeTime);
+            _spellChargeTimer.OnTimerEnd += SpellChargeTimer_OnTimerEnd;
             _cooldownTimer = new Timer(_wandData.CooldownTime);
             _currentMana = _wandData != null ? _wandData.ManaAmount : 0f;
             
@@ -56,16 +60,30 @@ namespace ProjectDarkness
             UpdateCurrentMana(_currentMana + (_wandData.ManaRegenPerSec * Time.deltaTime));
 
             // Update Timers
-            _castDelayTimer?.Tick(Time.deltaTime);
+            _spellChargeTimer?.Tick(Time.deltaTime);
             _cooldownTimer?.Tick(Time.deltaTime);
 
-            if (CanCast())
+            if (!CanMaintainSpellCharge())
             {
-                TryCastCurrentSpell();
+                CancelSpellCharge();
+                return;
+            }
+
+            if (ShouldStartSpellCharge())
+            {
+                StartSpellCharge();
             }
         }
 
-        private bool CanCast()
+        private void OnDestroy()
+        {
+            if (_spellChargeTimer != null)
+            {
+                _spellChargeTimer.OnTimerEnd -= SpellChargeTimer_OnTimerEnd;
+            }
+        }
+
+        private bool CanMaintainSpellCharge()
         {
             if (!GameInput.Instance.IsHoldingDownCastSpell) return false;
             if (InventoryManager.Instance.InventoryUI.IsOpen) return false;
@@ -73,14 +91,61 @@ namespace ProjectDarkness
             if (Time.timeScale == 0f) return false;
             if (HealthManager.Instance.IsDead) return false;
             if (GameManager.Instance != null && GameManager.Instance.GameComplete) return false;
-            if ((_cooldownTimer?.IsRunning() ?? false) || (_castDelayTimer?.IsRunning() ?? false)) return false;
+            if (_cooldownTimer?.IsRunning() ?? false) return false;
 
             return true;
         }
 
+        private bool ShouldStartSpellCharge()
+        {
+            int spellIndex = GetNextProjectileSpellIndex(_currentSequenceIndex);
+            if (spellIndex < 0 || (_spellChargeTimer?.IsRunning() ?? false))
+            {
+                return false;
+            }
+
+            ProjectileSpellData projectileSpellData = _spellInventory[spellIndex].SpellData as ProjectileSpellData;
+            CastContext castContext = BuildCastContextForSpell(spellIndex, projectileSpellData);
+
+            if (_currentMana < castContext.GetTotalManaCost())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void StartSpellCharge()
+        {
+            if (_spellChargeTimer.Duration <= 0f)
+            {
+                TryCastCurrentSpell();
+                return;
+            }
+            
+            
+
+            _spellChargeTimer.StartTimer();
+        }
+
+        private void CancelSpellCharge()
+        {
+            _spellChargeTimer?.StopTimer();
+        }
+
+        private void SpellChargeTimer_OnTimerEnd(object sender, EventArgs e)
+        {
+            if (!CanMaintainSpellCharge())
+            {
+                CancelSpellCharge();
+                return;
+            }
+
+            TryCastCurrentSpell();
+        }
+
         private void TryCastCurrentSpell()
         {
-            // Try to find a valid spell index with a spell
             int spellIndex = GetNextProjectileSpellIndex(_currentSequenceIndex);
             if (spellIndex < 0)
             {
@@ -91,10 +156,7 @@ namespace ProjectDarkness
                 return;
             }
 
-            // Valid spell index found
             ProjectileSpellData projectileSpellData = _spellInventory[spellIndex].SpellData as ProjectileSpellData;
-
-            // Checks for modifiers before this spell in the sequence, if found, add it to the cast context
             CastContext castContext = BuildCastContextForSpell(spellIndex, projectileSpellData);
 
             if (_currentMana < castContext.GetTotalManaCost())
@@ -166,13 +228,11 @@ namespace ProjectDarkness
         {
             _currentSequenceIndex = currentSpellIndex + 1;
 
-            if (GetNextProjectileSpellIndex(_currentSequenceIndex) >= 0)
+            if (GetNextProjectileSpellIndex(_currentSequenceIndex) < 0)
             {
-                _castDelayTimer.StartTimer();
+                StartCooldown();
                 return;
             }
-
-            StartCooldown();
         }
 
         private int GetNextProjectileSpellIndex(int startIndex)
@@ -192,12 +252,12 @@ namespace ProjectDarkness
         {
             _cooldownTimer.StartTimer();
             _currentSequenceIndex = 0;
-            _castDelayTimer.StopTimer();
+            _spellChargeTimer.StopTimer();
         }
 
         private void ResetCastingState()
         {
-            _castDelayTimer.StopTimer();
+            _spellChargeTimer.StopTimer();
             _cooldownTimer.StopTimer();
             _currentSequenceIndex = 0;
         }
