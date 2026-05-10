@@ -10,5 +10,6 @@ namespace ProjectDarkness
         [field: SerializeField] public Sprite UiDisplay { get; private set; }
         [field: SerializeField] public int ManaDrain { get; private set; } = 10;
         [field: SerializeField] public float SpellChargeTime { get; private set; } = 0.15f;
+        [field: SerializeField, TextArea] public string InGameDescription { get; private set; }
     }
 }

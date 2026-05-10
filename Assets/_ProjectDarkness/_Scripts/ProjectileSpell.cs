@@ -23,6 +23,12 @@ namespace ProjectDarkness
 
         [SerializeField] 
         private GameObject _spellModifierHolder;
+        
+        [SerializeField] 
+        private bool _useGravity = false;
+        
+        [SerializeField] 
+        private float _gravityModifier;
 
         private Rigidbody _rigidbody;
         private Vector3 _travelDirection;

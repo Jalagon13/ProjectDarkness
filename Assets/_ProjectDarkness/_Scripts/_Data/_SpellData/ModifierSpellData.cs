@@ -6,7 +6,6 @@ namespace ProjectDarkness
     [CreateAssetMenu(fileName = "New Modifier Spell Data", menuName = "ProjectDarkness/SpellData/Modifier")]
     public class ModifierSpellData : SpellData
     {
-    
         [field: PropertySpace(5)]
         [field: Header("Modifier Settings")]
         [field: SerializeField, Required] public ModifierSpell ModifierSpellPrefab { get; private set; }
@@ -16,5 +15,6 @@ namespace ProjectDarkness
 
         [field: SerializeField, Tooltip("Used for any interpretation for a multiplier value for the spell")]
         public float MultiplierValue { get; private set; } = 1.5f;
+        [field: SerializeField, TextArea(6, 10)] public string DeveloperNotes { get; private set; }
     }
 }
